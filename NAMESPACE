@@ -1,0 +1,6 @@
+useDynLib(qap)
+
+export(
+    "qap",
+    "read_qaplib"
+)

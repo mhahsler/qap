@@ -1,0 +1,9 @@
+Package: qap
+Title: Heuristics for the Quadratic Assignment Problem (QAP)
+Version: 0.1
+Date: 2015-09-28
+Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
+                email = "mhahsler@lyle.smu.edu"),
+            person("Franz", "Rendl", role = c("ctb", "cph")))
+Description: Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only a simulated annealing heuristic is available.
+License: GPL-3
