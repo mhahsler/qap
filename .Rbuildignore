@@ -6,3 +6,5 @@ proj$
 ^appveyor\.yml$
 ^revdep$
 ^.*\.o$
+^.*\.Rproj$
+^LICENSE
