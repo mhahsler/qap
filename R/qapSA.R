@@ -3,13 +3,13 @@
 ## simulation procedure for combinatorial optimization problems.
 ## European Journal of Operations Research, 17(2):169-174, 1984.
 
-qapSA <- function(D, W, miter = 2*nrow(D), fiter = 1.1, ft = .5,
+qapSA <- function(A, B, miter = 2*nrow(A), fiter = 1.1, ft = .5,
   rep = 10L, verbose = FALSE) {
-  storage.mode(D) <- "integer"
-  storage.mode(W) <- "integer"
-  n <- nrow(D)
+  storage.mode(A) <- "integer"
+  storage.mode(B) <- "integer"
+  n <- nrow(A)
 
-  if(any(dim(D) != n) || any(dim(W) != n)) stop("Matrix do not conform!")
+  if(any(dim(A) != n) || any(dim(B) != n)) stop("Matrix do not conform!")
 
   if(ft<0 || ft>=1) stop("ft needs to be in (0 ,1).")
 
@@ -21,7 +21,7 @@ qapSA <- function(D, W, miter = 2*nrow(D), fiter = 1.1, ft = .5,
 
   ## we do repetitions in R (not in the FORTRAN code)
   for(i in 1:rep) {
-    res <- .Fortran("qaph4", n = n, a = D, b = W,
+    res <- .Fortran("qaph4", n = n, a = A, b = B,
       c = matrix(0L, nrow=n ,ncol=n),
       miter = as.integer(miter), fiter = as.double(fiter), ft = as.double(ft),
       rep = 1L, maxdim = n, ope = integer(n), ol = integer(1),
@@ -38,6 +38,6 @@ qapSA <- function(D, W, miter = 2*nrow(D), fiter = 1.1, ft = .5,
 
   }
 
-  attr(best_perm, "opt") <- best_obj
+  attr(best_perm, "opj") <- best_obj
   best_perm
 }

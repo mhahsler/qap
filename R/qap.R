@@ -1,4 +1,4 @@
-qap <- function(D, W, method = NULL, ...) {
+qap <- function(A, B, method = NULL, ...) {
   if(is.null(method)) method <- "SA"
 
   methods <- c("SA")
@@ -6,7 +6,7 @@ qap <- function(D, W, method = NULL, ...) {
   if(is.na(method)) stop("Unknown method. Available methods are: ",
     paste(methods, collapse = ", "))
 
-  if(method == "SA") qapSA(D, W, ...)
+  if(method == "SA") qapSA(A, B, ...)
   else stop("Unknown method. Available methods are: ",
     paste(methods, collapse = ", "))
 }

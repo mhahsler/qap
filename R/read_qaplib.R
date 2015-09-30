@@ -5,8 +5,8 @@ read_qaplib <- function(file) {
   dat <- as.integer(scan(file, quiet = TRUE))
   n <- dat[1]
 
-  W <- matrix(dat[2:(n*n+1L)], ncol = n, nrow = n, byrow = TRUE)
-  D <- matrix(dat[(n*n+2L):(n*n+2L+n*n-1L)], ncol = n, nrow = n, byrow = TRUE)
+  A <- matrix(dat[2:(n*n+1L)], ncol = n, nrow = n, byrow = TRUE)
+  B <- matrix(dat[(n*n+2L):(n*n+2L+n*n-1L)], ncol = n, nrow = n, byrow = TRUE)
 
   # read solution if available
   sol <- NULL
@@ -19,5 +19,5 @@ read_qaplib <- function(file) {
   }
 
 
-  list(D=D, W=W, solution = sol, opt = opt)
+  list(A=A, B=B, solution = sol, opt = opt)
 }
