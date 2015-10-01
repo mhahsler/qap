@@ -1,5 +1,6 @@
 \name{qap}
 \alias{qap}
+\alias{qap.obj}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Solve Quadratic Assignment Problems (QAP)
@@ -11,6 +12,7 @@ but more will be added in the future.
 }
 \usage{
 qap(A, B, method = NULL, ...)
+qap.obj(A, B, o)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,6 +23,7 @@ qap(A, B, method = NULL, ...)
   \item{method}{ a character string indicating the used solver. Defaults
     to \code{"SA"}, the currently only available method. }
   \item{...}{ further arguments are passed on to the solver (see details). }
+  \item{o}{ a permutation vector for the assignment of facilities to locations. }
 }
 \details{
 The objective of the QAP is to find the best facility to location assignment.
@@ -29,13 +32,16 @@ the objective is
 
 \deqn{\mathrm{min}_{X \in \Pi}\; tr(AXBX^T)}{min_{pi \in PI} tr(AXBX^T)}
 
-The problem is known to be NP-hard. This function implements the simple
+\code{qap.obj} calculates the objective function for \code{A} and \code{B}
+with the permutation \code{o}.
+
+The QAP is known to be NP-hard. This function implements the simple
 simulated annealing heuristic described by Burkard and Rendl (1984).
 The code is based on Rendl's FORTRAN implementation of the algorithm available
 at the QAPLIB Web site.
 
 The solver has the additional arguments
-\code{miter = 2 * nrow(D), fiter = 1.1,
+\code{miter = 2 * nrow(A), fiter = 1.1,
   ft = 0.5} and \code{rep = 10L}
 \describe{
   \item{miter}{ integer; number of iterations at fixed temperature. }

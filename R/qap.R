@@ -11,4 +11,9 @@ qap <- function(A, B, method = NULL, ...) {
     paste(methods, collapse = ", "))
 }
 
-
+qap.obj <- function(A, B, o) {
+  n <- nrow(A)
+  s <- 0
+  for(i in 1:n) for(j in 1:n) s <- s+A[i,j]*B[o[i],o[j]]
+  s
+}
