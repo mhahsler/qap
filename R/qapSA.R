@@ -38,6 +38,6 @@ qapSA <- function(A, B, miter = 2*nrow(A), fiter = 1.1, ft = .5,
 
   }
 
-  attr(best_perm, "opj") <- best_obj
+  attr(best_perm, "obj") <- best_obj
   best_perm
 }
