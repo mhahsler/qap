@@ -42,7 +42,7 @@ at the QAPLIB Web site.
 
 The solver has the additional arguments
 \code{miter = 2 * nrow(A), fiter = 1.1,
-  ft = 0.5} and \code{rep = 10L}
+  ft = 0.5} and \code{rep = 1L}
 \describe{
   \item{miter}{ integer; number of iterations at fixed temperature. }
   \item{fiter}{ multiplication factor for miter after miter
@@ -77,8 +77,8 @@ p <- read_qaplib(system.file("qaplib", "had12.dat", package="qap"))
 p
 
 
-## run 5 repetitions verbose
-a <- qap(p$A, p$B, rep = 5, verbose = TRUE)
+## run 1 repetitions verbose
+a <- qap(p$A, p$B, verbose = TRUE)
 a
 
 ## compare with known optimum (% above optimum)

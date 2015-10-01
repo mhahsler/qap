@@ -4,12 +4,17 @@
 ## European Journal of Operations Research, 17(2):169-174, 1984.
 
 qapSA <- function(A, B, miter = 2*nrow(A), fiter = 1.1, ft = .5,
-  rep = 10L, verbose = FALSE) {
+  rep = 1L, verbose = FALSE) {
+  A <- unname(as.matrix(A))
+  B <- unname(as.matrix(B))
+
   storage.mode(A) <- "double"
   storage.mode(B) <- "double"
   n <- nrow(A)
-
   if(any(dim(A) != n) || any(dim(B) != n)) stop("Matrix do not conform!")
+
+  if(!isSymmetric(A) || !isSymmetric(B))
+    stop("Heuristic only available for symmetric QAP.")
 
   if(ft<0 || ft>=1) stop("ft needs to be in (0 ,1).")
 
@@ -23,7 +28,6 @@ qapSA <- function(A, B, miter = 2*nrow(A), fiter = 1.1, ft = .5,
   ## we start with a random permutation in perm
   for(i in 1:rep) {
     res <- .Fortran("qaph4", n = n, a = A, b = B,
-      c = matrix(0, nrow=n ,ncol=n),
       miter = as.integer(miter), fiter = as.double(fiter),
       ft = as.double(ft), ope = integer(n), ol = double(1), perm = sample(n),
       PACKAGE = "qap")
