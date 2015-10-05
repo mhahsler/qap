@@ -7,7 +7,7 @@ c     *                                                               *
 c     *        n       dimension of the problem                       *
 c     *        a(i,j)  distance matrix             i,j=1,...,n        *
 c     *        b(i,j)  connection matrix           i,j=1,...,n        *
-c     *        miter   number of iterations at fixed t                *
+c     *        m
 c     *        fiter   multiplication factor for miter after miter    *
 c     *                random transposition trials (positiv)          *
 c     *        ft      multiplication factor for t after miter random *
@@ -21,9 +21,9 @@ c     *        ol      objective function value for ope(i) (double)   *
 c *** *****************************************************************
 
       subroutine qaph4(n, a, b, miter, fiter, ft,
-     1                  ope, ol, perm)
+     1                  ope, ol, perm, maxsteps)
 
-      integer n
+      integer n, maxsteps, step
       integer ope(n), perm(n), miter
       double precision fiter, ft
       integer i, j, ibild, jbild, kbild, i1, i2, j1
@@ -31,6 +31,8 @@ c *** *****************************************************************
       double precision ol, min, max, delta, ibest
       double precision a(n, n), b(n, n)
       double precision ia, ib
+
+      step = 0
 
 c       Initialize R RNG
       CALL getrngstate()
@@ -58,7 +60,9 @@ c  evaluate obj. function value corresponding to perm
   300 continue
 c  set stopping criterion variables min,max
       min = ol
-      max = 0
+c      max = 0
+c     set max to the smallest double
+      max = -1.797693D+308
 c--------------------------------------------
 c  perform m1 random trials with t1 constant
 c--------------------------------------------
@@ -126,12 +130,13 @@ c  adjust iteration control variables m1 and t1
       t1 = t1 * ft
       m1 = m1 * fiter
 
-c  debug
-c      write(6,12) min, max, ol
-c   12 format(F15.1, F15.1, F15.1)
+c  DEBUG
+c      write(6,12) step, min, max, ol
+c   12 format(I10, E20.5, E20.5, E20.5)
 
 c  stopping criterion
-      if (max .gt. min) goto 300
+      step = step + 1
+      if (max .gt. min .and. step .lt. maxsteps) goto 300
 
 c  set output variable ol
       ol = ibest
