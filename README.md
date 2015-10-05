@@ -1,5 +1,9 @@
 # qap - Heuristics for the Quadratic Assignment Problem (QAP) - R package
 
+[![CRAN version](http://www.r-pkg.org/badges/version/qap)](http://cran.r-project.org/web/packages/qap/index.html)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/qap)](http://cran.r-project.org/web/packages/qap/index.html)
+[![Travis-CI Build Status](https://travis-ci.org/mhahsler/qap.svg?branch=master)](https://travis-ci.org/mhahsler/qap)
+
 Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only a simulated annealing heuristic described in 
 
 > R.E. Burkard and F. Rendl. A thermodynamically motivated
