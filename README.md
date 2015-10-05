@@ -10,7 +10,9 @@ is available.
 
 
 ## Installation
-You can install this package directly from github. Open R and execute the following
+The stable version of this package can be installed from CRAN.
+You can install the development version of the package directly from github. 
+Open R and execute the following
 
 ```
 ## install and load devtools
