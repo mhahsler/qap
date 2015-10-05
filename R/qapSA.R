@@ -3,8 +3,8 @@
 ## simulation procedure for combinatorial optimization problems.
 ## European Journal of Operations Research, 17(2):169-174, 1984.
 
-qapSA <- function(A, B, miter = 2*nrow(A), fiter = 1.1, ft = .5,
-  rep = 1L, verbose = FALSE) {
+qapSA <- function(A, B, rep = 1L, miter = 2*nrow(A), fiter = 1.1, ft = .5,
+   maxsteps = 50L, verbose = FALSE) {
   A <- unname(as.matrix(A))
   B <- unname(as.matrix(B))
 
@@ -15,6 +15,8 @@ qapSA <- function(A, B, miter = 2*nrow(A), fiter = 1.1, ft = .5,
 
   if(!isSymmetric(A) || !isSymmetric(B))
     stop("Heuristic only available for symmetric QAP.")
+  if(any(A<0) || any(B<0))
+    stop("All values in A and B need to be positive.")
 
   if(ft<0 || ft>=1) stop("ft needs to be in (0 ,1).")
 
@@ -30,7 +32,7 @@ qapSA <- function(A, B, miter = 2*nrow(A), fiter = 1.1, ft = .5,
     res <- .Fortran("qaph4", n = n, a = A, b = B,
       miter = as.integer(miter), fiter = as.double(fiter),
       ft = as.double(ft), ope = integer(n), ol = double(1), perm = sample(n),
-      PACKAGE = "qap")
+      maxsteps = as.integer(maxsteps), PACKAGE = "qap")
 
 
     if(res$ol < best_obj) {
