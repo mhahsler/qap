@@ -14,8 +14,8 @@ read_qaplib(file)
 }
 \details{
 Problems end with the extension \code{.dat} and solutions with \code{.sln}.
-The code tries to read the problem and, if available in the samew directory,
-it also reads the solution and the known optimal vaule from the
+The code tries to read the problem and, if available in the same directory,
+it also reads the solution and the known optimal value from the
 solution file.
 
 The package contains a copy of the problem instances and solutions

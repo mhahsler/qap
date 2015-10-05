@@ -16,9 +16,9 @@ qap.obj(A, B, o)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{A}{ a symmetric integer matrix with weights/flows between pairs
+  \item{A}{ a symmetric matrix with positive weights/flows between pairs
       facilities. }
-  \item{B}{ a symmetric integer matrix with distances between pairs of
+  \item{B}{ a symmetric matrix with positive distances between pairs of
       locations.}
   \item{method}{ a character string indicating the used solver. Defaults
     to \code{"SA"}, the currently only available method. }
@@ -41,15 +41,16 @@ The code is based on Rendl's FORTRAN implementation of the algorithm available
 at the QAPLIB Web site.
 
 The solver has the additional arguments
-\code{miter = 2 * nrow(A), fiter = 1.1,
-  ft = 0.5} and \code{rep = 1L}
+\code{rep = 1L, miter = 2 * nrow(A), fiter = 1.1,
+  ft = 0.5} and \code{maxsteps = 50L}
 \describe{
+  \item{rep}{ integer; number of restarts. }
   \item{miter}{ integer; number of iterations at fixed temperature. }
   \item{fiter}{ multiplication factor for miter after miter
       random transposition trials. }
   \item{ft}{ multiplication factor for t after miter random
       transposition trials (between 0 and 1).}
-  \item{rep}{ integer; number of restarts. }
+  \item{maxsteps}{ integer; maximal number of allowed cooling steps. }
 }
 }
 \value{
@@ -81,14 +82,14 @@ p
 a <- qap(p$A, p$B, verbose = TRUE)
 a
 
-## compare with known optimum (% above optimum)
+## compare with known optimum (gap, % above optimum)
 (attr(a, "obj") - p$opt)/p$opt * 100
 
 ## run more repetitions quietly
 a <- qap(p$A, p$B, rep = 100)
 a
 
-## compare with known optimum (% above optimum)
+## compare with known optimum (gap, % above optimum)
 (attr(a, "obj") - p$opt)/p$opt * 100
 }
 \keyword{optim}
