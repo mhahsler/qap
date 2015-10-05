@@ -1,7 +1,7 @@
 Package: qap
 Title: Heuristics for the Quadratic Assignment Problem (QAP)
-Version: 0.1
-Date: 2015-09-28
+Version: 0.1-0
+Date: 2015-10-05
 Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
                 email = "mhahsler@lyle.smu.edu"),
             person("Franz", "Rendl", role = c("ctb", "cph")))
