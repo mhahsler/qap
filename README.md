@@ -5,7 +5,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/mhahsler/qap.svg?branch=master)](https://travis-ci.org/mhahsler/qap)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mhahsler/qap?branch=master&svg=true)](https://ci.appveyor.com/project/mhahsler/qap)
 
-Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only a simulated annealing heuristic described in 
+Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only the simulated annealing heuristic described in 
 
 > R.E. Burkard and F. Rendl. A thermodynamically motivated
 > simulation procedure for combinatorial optimization problems.
@@ -14,25 +14,17 @@ Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only
 is available. 
 
 
+
 ## Installation
-The stable version of this package can be installed from CRAN.
-You can install the development version of the package directly from github. 
-Open R and execute the following
 
-```
-## install and load devtools
-install.packages("devtools")
-library(devtools)
+* __Stable CRAN version:__ install from within R.
+* __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install via `intall_git()` (needs devtools) 
 
-## install qap
-install_github("mhahsler/qap")
+## Example
 ```
-_Note:_ You will need a working development environment. For Linux you need a compiler and various libraries, for Windows install [Rtools](http://cran.r-project.org/bin/windows/Rtools/), and for OS X you need to install [Xcode](http://developer.apple.com/xcode/).
+library(qap)
 
-## Simple Example
-Now you can sove a QAP from QAPLIB
-```
-## load the had12 QAPLIB problem
+## load the had12 QAPLIB problem (shipped with the package)
 p <- read_qaplib(system.file("qaplib", "had12.dat", package="qap"))
 
 ## run 100 repetitions
