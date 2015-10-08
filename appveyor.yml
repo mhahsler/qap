@@ -34,7 +34,7 @@ artifacts:
     name: Logs
 
   - path: '\*_*.tar.gz'
-    name: Bits
+    name: Linux package
 
   - path: '\*_*.zip'
-    name: Bits
+    name: Windows package
