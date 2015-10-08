@@ -3,6 +3,7 @@
 [![CRAN version](http://www.r-pkg.org/badges/version/qap)](http://cran.r-project.org/web/packages/qap/index.html)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/qap)](http://cran.r-project.org/web/packages/qap/index.html)
 [![Travis-CI Build Status](https://travis-ci.org/mhahsler/qap.svg?branch=master)](https://travis-ci.org/mhahsler/qap)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mhahsler/qap?branch=master&svg=true)](https://ci.appveyor.com/project/mhahsler/qap)
 
 Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only a simulated annealing heuristic described in 
 
