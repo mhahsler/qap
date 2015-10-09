@@ -13,24 +13,26 @@ Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only
 
 is available. 
 
-
-
 ## Installation
 
 * __Stable CRAN version:__ install from within R.
-* __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install via `intall_git()` (needs devtools) 
+* __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install via `intall_github("mhahsler/qap")` (requires the R package `devtools`) 
 
 ## Example
 ```
-library(qap)
-
+R> library(qap)
+ 
 ## load the had12 QAPLIB problem (shipped with the package)
-p <- read_qaplib(system.file("qaplib", "had12.dat", package="qap"))
+R> p <- read_qaplib(system.file("qaplib", "had20.dat", package="qap"))
 
 ## run 100 repetitions
-a <- qap(W, D, rep = 100)
-a
-
+> a <- qap(p$A, p$B, rep = 100)
+> a
+ [1]  8 15 16 14 19  6  7 12  1 11 10  5  3 20  2 17  4  9 18 13
+attr(,"obj")
+[1] 6926
+ 
 ## compare with known optimum (% above optimum)
-(attr(a, "opt") - p$opt)/p$opt * 100
+R> (attr(a, "obj") - p$opt)/p$opt * 100
+[1] 0.05778677
 ```
