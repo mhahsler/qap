@@ -19,7 +19,7 @@ is available.
 * __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install via `intall_github("mhahsler/qap")` (requires the R package `devtools`) 
 
 ## Example
-```
+```R
 R> library(qap)
  
 ## load the had12 QAPLIB problem (shipped with the package)
