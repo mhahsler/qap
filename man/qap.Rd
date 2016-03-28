@@ -83,13 +83,14 @@ a <- qap(p$A, p$B, verbose = TRUE)
 a
 
 ## compare with known optimum (gap, % above optimum)
-(attr(a, "obj") - p$opt)/p$opt * 100
+opt <- 1625
+(attr(a, "obj") - opt)/opt * 100
 
 ## run more repetitions quietly
 a <- qap(p$A, p$B, rep = 100)
 a
 
 ## compare with known optimum (gap, % above optimum)
-(attr(a, "obj") - p$opt)/p$opt * 100
+(attr(a, "obj") - opt)/opt * 100
 }
 \keyword{optim}

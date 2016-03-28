@@ -6,4 +6,6 @@ Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
                 email = "mhahsler@lyle.smu.edu"),
             person("Franz", "Rendl", role = c("ctb", "cph")))
 Description: Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only a simulated annealing heuristic is available.
+Suggests: testthat
+BugReports: https://github.com/mhahsler/qap/issues
 License: GPL-3
