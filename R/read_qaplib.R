@@ -11,7 +11,7 @@ read_qaplib <- function(file) {
   # read solution if available
   sol <- NULL
   opt <- NULL
-  file_sol <- paste(sub("^([^.]*).*", "\\1", file), ".sln", sep ="")
+  file_sol <- sub(".dat", ".sln", file)
   if(file.exists(file_sol)) {
     dat <- scan(file_sol, quiet = TRUE)
     sol <- dat[-(1:2)]
