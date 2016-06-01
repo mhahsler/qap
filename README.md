@@ -16,7 +16,7 @@ is available.
 ## Installation
 
 * __Stable CRAN version:__ install from within R.
-* __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install via `intall_github("mhahsler/qap")` (requires the R package `devtools`) 
+* __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install via `install_github("mhahsler/qap")` (requires the R package `devtools`) 
 
 ## Example
 ```R
@@ -36,3 +36,11 @@ attr(,"obj")
 R> (attr(a, "obj") - p$opt)/p$opt * 100
 [1] 0.05778677
 ```
+
+## Further Information
+
+* Development version of [qap on github](https://github.com/mhahsler/qap).
+* [qap reference manual](http://cran.r-project.org/web/packages/qap/qap.pdf)
+
+_Maintainer:_ [Michael Hahsler](http://michael.hahsler.net)
+
