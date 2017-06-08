@@ -15,7 +15,8 @@ install.packages("qap")
 ```
 __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install from GitHub (needs devtools).
 ```R 
-install_git("mhahsler/qap")
+library("devtools")
+install_github("mhahsler/qap")
 ```
 
 
