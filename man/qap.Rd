@@ -38,7 +38,7 @@ with the permutation \code{o}.
 The QAP is known to be NP-hard. This function implements the simple
 simulated annealing heuristic described by Burkard and Rendl (1984).
 The code is based on Rendl's FORTRAN implementation of the algorithm available
-at the QAPLIB Web site.
+at the QAPLIB website.
 
 The solver has the additional arguments
 \code{rep = 1L, miter = 2 * nrow(A), fiter = 1.1,
