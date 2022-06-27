@@ -31,7 +31,7 @@ Returns a list with the components
 \references{
 R.E. Burkard, E. Cela, S.E. Karisch and F. Rendl,
 QAPLIB - A Quadratic Assignment Problem Library,
-\url{http://anjos.mgi.polymtl.ca/qaplib/}
+\url{https://www.opt.math.tugraz.at/qaplib/}
 }
 \author{
 Michael Hahsler

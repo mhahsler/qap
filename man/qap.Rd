@@ -71,19 +71,17 @@ Koopmans TC, Beckmann M (1957). Assignment problems and the location of economic
 Hubert, L., and Schultz, J. (1976). Quadratic assignment as a general data analysis strategy.
 \emph{British Journal of Mathematical and Statistical Psychology,} 29(2), 190-241.
 \doi{10.1111/j.2044-8317.1976.tb00714.x}
-
-R.E. Burkard, E. Cela, S.E. Karisch and F. Rendl,
-QAPLIB - A Quadratic Assignment Problem Library,
-\url{http://anjos.mgi.polymtl.ca/qaplib/}
 }
 \author{
 Michael Hahsler
+}
+\seealso{
+\link{read_qaplib}
 }
 \examples{
 ## load the had12 QAPLIB problem
 p <- read_qaplib(system.file("qaplib", "had12.dat", package="qap"))
 p
-
 
 ## run 1 repetitions verbose
 a <- qap(p$A, p$B, verbose = TRUE)

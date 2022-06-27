@@ -34,19 +34,29 @@ install.packages("qap", repos = "https://mhahsler.r-universe.dev")
 
 ## Usage
 
-Load the had12 QAPLIB problem (shipped with the package). The problem
-contains the A and B matrices and the optimal solution. We run 10
-repetitions and use the best solution.
+The package contains a copy of the problem instances and solutions from
+[QAPLIB](https://www.opt.math.tugraz.at/qaplib/). We load the `had20`
+QAPLIB problem. The problem contains the A and B matrices and the
+optimal solution and the optimal objective function value.
 
 ``` r
 library(qap)
 set.seed(1000)
 
 p <- read_qaplib(system.file("qaplib", "had20.dat", package = "qap"))
+p$solution
+```
+
+    ##  [1]  8 15 16 14 19  6  7 17  1 12 10 11  5 20  2  3  4  9 18 13
+
+``` r
 p$opt
 ```
 
     ## [1] 6922
+
+We run the simulated annealing heuristic 10 times and use the best
+solution.
 
 ``` r
 a <- qap(p$A, p$B, rep = 10)
@@ -57,7 +67,7 @@ a
     ## attr(,"obj")
     ## [1] 6926
 
-Compare with known optimum (% above optimum).
+Compare the solution with known optimum (% above optimum).
 
 ``` r
 (attr(a, "obj") - p$opt)/p$opt * 100
@@ -67,8 +77,8 @@ Compare with known optimum (% above optimum).
 
 ## References
 
--   Hahsler M (2017). *qap: Heuristics for the Quadratic Assignment
-    Problem (QAP)*. R package version 0.1-1,
+-   Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
+    Problem (QAP)*. R package version 0.1-2,
     <https://github.com/mhahsler/qap>.
 -   R.E. Burkard and F. Rendl (1984). A thermodynamically motivated
     simulation procedure for combinatorial optimization problems.
