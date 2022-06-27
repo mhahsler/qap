@@ -40,10 +40,12 @@ c       Initialize R RNG
 c  evaluate mean t of objective function value
       ia = 0
       ib = 0
-      do 100 i=1,n
-      do 100 j=1,n
-         ia = ia + a(i,j)
-  100    ib = ib + b(i,j)
+      do i=1,n
+         do j=1,n
+            ia = ia + a(i,j)
+            ib = ib + b(i,j)
+         end do
+      end do
       t = ia / DBLE(n*n-n)
       t = t * ib
       ibest = t
@@ -53,9 +55,11 @@ c  set local variables for t,miter and random number generator
       m1 = miter
 c  evaluate obj. function value corresponding to perm
       ol = 0
-      do 200 i = 1,n
-      do 200 j = 1,n
-  200 ol = ol + a(i,j) * b(perm(i),perm(j))
+      do i = 1,n
+         do j = 1,n
+            ol = ol + a(i,j) * b(perm(i),perm(j))
+         end do
+      end do
 
   300 continue
 c  set stopping criterion variables min,max
@@ -122,8 +126,9 @@ c  best found solution
          if (ol .gt. max) max = ol
          if(ibest .lt. ol) goto 900
          ibest = ol
-         do 850 j1 = 1,n
-  850    ope(j1) = perm(j1)
+         do j1 = 1,n
+            ope(j1) = perm(j1)
+         end do
   900    continue
 
 c  adjust iteration control variables m1 and t1
