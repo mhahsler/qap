@@ -3,8 +3,9 @@ Title: Heuristics for the Quadratic Assignment Problem (QAP)
 Version: 0.1-1
 Date: 2017-02-26
 Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
-                email = "mhahsler@lyle.smu.edu"),
-            person("Franz", "Rendl", role = c("ctb", "cph")))
+	    email = "mhahsler@lyle.smu.edu",
+	    comment = c(ORCID = "0000-0003-2716-1405")),
+	    person("Franz", "Rendl", role = c("ctb", "cph")))
 Description: Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only a simulated annealing heuristic is available.
 Suggests: testthat
 URL: https://github.com/mhahsler/qap
