@@ -8,9 +8,14 @@ status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/qap)](https://CRAN.R-project.org/package=qap)
 
-Implements heuristics for the Quadratic Assignment Problem (QAP).
-Currently only the simulated annealing heuristic described in Burkard
-and Rendl (1984) is available.
+This package implements heuristics for the Quadratic Assignment Problem
+(QAP) first introduced by Koopmans and Beckmann (1957). Although, the
+QAP was introduced as a combinatorial optimization problem for the
+facility location problem in operations research, it also has many
+applications in data analysis (see Hubert and Schultz; 1976).
+
+The problem is NP-hard and the package implements the simulated
+annealing heuristic described in [Burkard and Rendl (1984)](#BR1984).
 
 ## Installation
 
@@ -62,8 +67,17 @@ Compare with known optimum (% above optimum).
 
 ## References
 
--   R.E. Burkard and F. Rendl. A thermodynamically motivated simulation
-    procedure for combinatorial optimization problems. *European Journal
-    of Operations Research,* 17(2):169-174, 1984.
--   [qap reference
-    manual](https://cran.r-project.org/package=qap/qap.pdf)
+-   Hahsler M (2017). *qap: Heuristics for the Quadratic Assignment
+    Problem (QAP)*. R package version 0.1-1,
+    <https://github.com/mhahsler/qap>.
+-   <a id = "BR1983" />R.E. Burkard and F. Rendl (1984). A
+    thermodynamically motivated simulation procedure for combinatorial
+    optimization problems. *European Journal of Operations Research,*
+    17(2):169-174. <https://doi.org/10.1016/0377-2217(84)90231-5>
+-   Koopmans TC, Beckmann M (1957). Assignment problems and the location
+    of economic activities. *Econometrica* 25(1):53-76.
+    <https://doi.org/10.2307/1907742>
+-   Hubert, L., and Schultz, J. (1976). Quadratic assignment as a
+    general data analysis strategy. *British Journal of Mathematical and
+    Statistical Psychology,* 29(2), 190–241.
+    <https://doi.org/10.1111/j.2044-8317.1976.tb00714.x>

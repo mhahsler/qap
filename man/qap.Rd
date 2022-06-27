@@ -35,6 +35,9 @@ the objective is
 \code{qap.obj} calculates the objective function for \code{A} and \code{B}
 with the permutation \code{o}.
 
+Although, the QAP was introduced as a combinatorial optimization problem for the facility location problem in operations research (see Koopmans and Beckmann;1957), it also has many applications in data analysis (see Hubert and Schultz; 1976).
+
+
 The QAP is known to be NP-hard. This function implements the simple
 simulated annealing heuristic described by Burkard and Rendl (1984).
 The code is based on Rendl's FORTRAN implementation of the algorithm available
@@ -58,9 +61,16 @@ Returns an integer vector with facility to location assignments. The
 objective function value is provided as attribute \code{"obj"}.
 }
 \references{
-R.E. Burkard and F. Rendl. A thermodynamically motivated
-simulation procedure for combinatorial optimization problems.
-\emph{European Journal of Operations Research,} 17(2):169-174, 1984.
+R.E. Burkard and F. Rendl (1984). A thermodynamically motivated simulation procedure for combinatorial optimization problems. \emph{European Journal of Operations Research,} 17(2):169-174.
+\doi{10.1016/0377-2217(84)90231-5}
+
+Koopmans TC, Beckmann M (1957). Assignment problems and the location of economic activities.
+\emph{Econometrica} 25(1):53-76.
+\doi{10.2307/1907742}
+
+Hubert, L., and Schultz, J. (1976). Quadratic assignment as a general data analysis strategy.
+\emph{British Journal of Mathematical and Statistical Psychology,} 29(2), 190-241.
+\doi{10.1111/j.2044-8317.1976.tb00714.x}
 
 R.E. Burkard, E. Cela, S.E. Karisch and F. Rendl,
 QAPLIB - A Quadratic Assignment Problem Library,
@@ -69,9 +79,6 @@ QAPLIB - A Quadratic Assignment Problem Library,
 \author{
 Michael Hahsler
 }
-%\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-%}
 \examples{
 ## load the had12 QAPLIB problem
 p <- read_qaplib(system.file("qaplib", "had12.dat", package="qap"))
