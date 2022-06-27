@@ -1,0 +1,41 @@
+---
+output: github_document
+---
+
+```{r echo=FALSE, results = 'asis'}
+pkg <- 'qap'
+
+source("https://raw.githubusercontent.com/mhahsler/pkg_helpers/main/pkg_helpers.R")
+pkg_title(pkg)
+```
+
+Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only the simulated annealing heuristic described in Burkard and Rendl (1984) is available. 
+
+```{r echo=FALSE, results = 'asis'}
+pkg_install(pkg)
+```
+
+## Usage
+
+Load the had12 QAPLIB problem (shipped with the package). The problem contains the A and B matrices and the optimal solution. We run 10 repetitions and use the best solution.
+```{r}
+library(qap)
+set.seed(1000)
+
+p <- read_qaplib(system.file("qaplib", "had20.dat", package="qap"))
+p$opt
+
+a <- qap(p$A, p$B, rep = 10)
+a
+```
+
+Compare with known optimum (% above optimum).
+```{r}
+(attr(a, "obj") - p$opt)/p$opt * 100
+```
+
+## References
+
+* R.E. Burkard and F. Rendl. A thermodynamically motivated simulation procedure for combinatorial optimization problems. _European Journal of Operations Research,_ 17(2):169-174, 1984.
+* [qap package reference manual.](https://cran.r-project.org/package=qap/qap.pdf)
+

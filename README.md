@@ -1,54 +1,69 @@
-# qap - Heuristics for the Quadratic Assignment Problem (QAP) - R package
 
-[![CRAN version](http://www.r-pkg.org/badges/version/qap)](https://cran.r-project.org/package=qap)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/qap)](https://cran.r-project.org/package=qap)
-[![Travis-CI Build Status](https://travis-ci.org/mhahsler/qap.svg?branch=master)](https://travis-ci.org/mhahsler/qap)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mhahsler/qap?branch=master&svg=true)](https://ci.appveyor.com/project/mhahsler/qap)
+# R package qap - Heuristics for the Quadratic Assignment Problem (QAP)
 
-Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only the simulated annealing heuristic described in Burkard and Rendl (1984) is available. 
+[![CRAN
+version](http://www.r-pkg.org/badges/version/qap)](https://CRAN.R-project.org/package=qap)
+[![stream r-universe
+status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe.dev/ui#package:qap)
+[![CRAN RStudio mirror
+downloads](http://cranlogs.r-pkg.org/badges/qap)](https://CRAN.R-project.org/package=qap)
+
+Implements heuristics for the Quadratic Assignment Problem (QAP).
+Currently only the simulated annealing heuristic described in Burkard
+and Rendl (1984) is available.
 
 ## Installation
 
-__Stable CRAN version:__ install from within R with
-```R
+**Stable CRAN version:** Install from within R with
+
+``` r
 install.packages("qap")
 ```
-__Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/qap/build/artifacts) or install from GitHub (needs devtools).
-```R 
-library("devtools")
-install_github("mhahsler/qap")
-```
 
+**Current development version:** Install from
+[r-universe.](https://mhahsler.r-universe.dev/ui#package:qap)
+
+``` r
+install.packages("qap", repos = "https://mhahsler.r-universe.dev")
+```
 
 ## Usage
 
-Load the had12 QAPLIB problem (shipped with the package) and
-run 100 repetitions.
-```R
-library(qap)
-p <- read_qaplib(system.file("qaplib", "had20.dat", package="qap"))
+Load the had12 QAPLIB problem (shipped with the package). The problem
+contains the A and B matrices and the optimal solution. We run 10
+repetitions and use the best solution.
 
-a <- qap(p$A, p$B, rep = 100)
+``` r
+library(qap)
+set.seed(1000)
+
+p <- read_qaplib(system.file("qaplib", "had20.dat", package = "qap"))
+p$opt
+```
+
+    ## [1] 6922
+
+``` r
+a <- qap(p$A, p$B, rep = 10)
 a
 ```
 
-```
-[1]  8 15 16 14 19  6  7 12  1 11 10  5  3 20  2 17  4  9 18 13
-attr(,"obj")
-[1] 6926
-```
+    ##  [1]  8 15 16 14 19  6  7 12  1 11 10  5  3 20  2 17  4  9 18 13
+    ## attr(,"obj")
+    ## [1] 6926
 
 Compare with known optimum (% above optimum).
-```R
+
+``` r
 (attr(a, "obj") - p$opt)/p$opt * 100
 ```
 
-```
-[1] 0.05778677
-```
+    ## [1] 0.058
 
 ## References
 
-* R.E. Burkard and F. Rendl. A thermodynamically motivated simulation procedure for combinatorial optimization problems. _European Journal of Operations Research,_ 17(2):169-174, 1984.
-* [qap reference manual](https://cran.r-project.org/package=qap/qap.pdf)
-
+-   R.E. Burkard and F. Rendl. A thermodynamically motivated simulation
+    procedure for combinatorial optimization problems. *European Journal
+    of Operations Research,* 17(2):169-174, 1984.
+-   [qap reference
+    manual](https://cran.r-project.org/package=qap/qap.pdf)
