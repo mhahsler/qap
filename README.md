@@ -1,5 +1,5 @@
 
-# R package qap - Heuristics for the Quadratic Assignment Problem (QAP)
+# <img src="man/figures/logo.svg" align="right" height="139" /> R package qap - Heuristics for the Quadratic Assignment Problem (QAP)
 
 [![CRAN
 version](http://www.r-pkg.org/badges/version/qap)](https://CRAN.R-project.org/package=qap)
