@@ -26,17 +26,20 @@ qap.obj(A, B, o)
   \item{o}{ a permutation vector for the assignment of facilities to locations. }
 }
 \details{
-The objective of the QAP is to find the best facility to location assignment.
+The QAP is a facilities location problem. Given \eqn{n} facilities and
+\eqn{n} locations with a matrix \eqn{A} specifying the flows between facilities and
+a matrix \eqn{B} with location distances,
+find the best facility to location assignment that minimizes the total transporation cost given
+as flow times distance.
 The assignment is represented by a permutation matrix \eqn{X}{X} and
 the objective is
 
 \deqn{\mathrm{min}_{X \in \Pi}\; tr(AXBX^T)}{min_{pi \in PI} tr(AXBX^T)}
 
-\code{qap.obj} calculates the objective function for \code{A} and \code{B}
+\code{iqap.obj} calculates the objective function for \eqn{A} and \eqn{B}
 with the permutation \code{o}.
 
 Although, the QAP was introduced as a combinatorial optimization problem for the facility location problem in operations research (see Koopmans and Beckmann;1957), it also has many applications in data analysis (see Hubert and Schultz; 1976).
-
 
 The QAP is known to be NP-hard. This function implements the simple
 simulated annealing heuristic described by Burkard and Rendl (1984).

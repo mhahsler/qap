@@ -8,14 +8,16 @@ status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/qap)](https://CRAN.R-project.org/package=qap)
 
-This package implements heuristics for the Quadratic Assignment Problem
-(QAP) first introduced by Koopmans and Beckmann (1957). Although, the
-QAP was introduced as a combinatorial optimization problem for the
-facility location problem in operations research, it also has many
-applications in data analysis (see Hubert and Schultz; 1976).
+This package implements heuristics for the [Quadratic Assignment Problem
+(QAP)](https://en.wikipedia.org/wiki/Quadratic_assignment_problem). The
+QAP was introduced as a combinatorial optimization problem from the
+category of facilities location problems in operations research
+(Koopmans and Beckmann; 1957). It also has many applications in data
+analysis including cluster analysis and seriation (see Hubert and
+Schultz; 1976).
 
-The problem is NP-hard and the package implements the simulated
-annealing heuristic described in Burkard and Rendl (1984).
+The problem is NP-hard and the package implements the very effective
+simulated annealing heuristic described in Burkard and Rendl (1984).
 
 ## Installation
 
