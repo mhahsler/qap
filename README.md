@@ -4,9 +4,11 @@
 [![CRAN
 version](http://www.r-pkg.org/badges/version/qap)](https://CRAN.R-project.org/package=qap)
 [![stream r-universe
-status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe.dev/ui#package:qap)
+status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe.dev/qap)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/qap)](https://CRAN.R-project.org/package=qap)
+
+## Introduction
 
 This package implements heuristics for the [Quadratic Assignment Problem
 (QAP)](https://en.wikipedia.org/wiki/Quadratic_assignment_problem). The
@@ -19,6 +21,23 @@ Schultz; 1976).
 The problem is NP-hard and the package implements the very effective
 simulated annealing heuristic described in Burkard and Rendl (1984).
 
+The following R packages use `qap`:
+[seriation](https://CRAN.R-project.org/package=seriation)
+
+To cite package ‘qap’ in publications use:
+
+> Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
+> Problem (QAP)*. R package version 0.1-2,
+> <https://github.com/mhahsler/qap>.
+
+    @Manual{,
+      title = {qap: Heuristics for the Quadratic Assignment Problem (QAP)},
+      author = {Michael Hahsler},
+      year = {2022},
+      note = {R package version 0.1-2},
+      url = {https://github.com/mhahsler/qap},
+    }
+
 ## Installation
 
 **Stable CRAN version:** Install from within R with
@@ -28,7 +47,7 @@ install.packages("qap")
 ```
 
 **Current development version:** Install from
-[r-universe.](https://mhahsler.r-universe.dev/ui#package:qap)
+[r-universe.](https://mhahsler.r-universe.dev/qap)
 
 ``` r
 install.packages("qap", repos = "https://mhahsler.r-universe.dev")
@@ -79,17 +98,17 @@ Compare the solution with known optimum (% above optimum).
 
 ## References
 
--   Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
-    Problem (QAP)*. R package version 0.1-2,
-    <https://github.com/mhahsler/qap>.
--   R.E. Burkard and F. Rendl (1984). A thermodynamically motivated
-    simulation procedure for combinatorial optimization problems.
-    *European Journal of Operations Research,* 17(2):169-174.
-    <https://doi.org/10.1016/0377-2217(84)90231-5>
--   Koopmans TC, Beckmann M (1957). Assignment problems and the location
-    of economic activities. *Econometrica* 25(1):53-76.
-    <https://doi.org/10.2307/1907742>
--   Hubert, L., and Schultz, J. (1976). Quadratic assignment as a
-    general data analysis strategy. *British Journal of Mathematical and
-    Statistical Psychology,* 29(2), 190–241.
-    <https://doi.org/10.1111/j.2044-8317.1976.tb00714.x>
+- Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
+  Problem (QAP)*. R package version 0.1-2,
+  <https://github.com/mhahsler/qap>.
+- R.E. Burkard and F. Rendl (1984). A thermodynamically motivated
+  simulation procedure for combinatorial optimization problems.
+  *European Journal of Operations Research,* 17(2):169-174.
+  <https://doi.org/10.1016/0377-2217(84)90231-5>
+- Koopmans TC, Beckmann M (1957). Assignment problems and the location
+  of economic activities. *Econometrica* 25(1):53-76.
+  <https://doi.org/10.2307/1907742>
+- Hubert, L., and Schultz, J. (1976). Quadratic assignment as a general
+  data analysis strategy. *British Journal of Mathematical and
+  Statistical Psychology,* 29(2), 190–241.
+  <https://doi.org/10.1111/j.2044-8317.1976.tb00714.x>

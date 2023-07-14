@@ -9,6 +9,8 @@ source("https://raw.githubusercontent.com/mhahsler/pkg_helpers/main/pkg_helpers.
 pkg_title(pkg)
 ```
 
+## Introduction
+
 This package implements heuristics for the [Quadratic Assignment Problem (QAP)](https://en.wikipedia.org/wiki/Quadratic_assignment_problem).
 The QAP was introduced as a combinatorial optimization problem from the category of facilities location 
 problems in operations research (Koopmans and Beckmann; 1957). 
@@ -19,6 +21,8 @@ described in Burkard and Rendl (1984).
 
 
 ```{r echo=FALSE, results = 'asis'}
+pkg_usage(pkg)
+pkg_citation(pkg)
 pkg_install(pkg)
 ```
 
@@ -32,7 +36,7 @@ objective function value.
 library(qap)
 set.seed(1000)
 
-p <- read_qaplib(system.file("qaplib", "had20.dat", package="qap"))
+p <- read_qaplib(system.file("qaplib", "had20.dat", package = "qap"))
 p$solution
 p$opt
 ```
