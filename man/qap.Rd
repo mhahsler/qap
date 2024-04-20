@@ -29,7 +29,7 @@ qap.obj(A, B, o)
 The QAP is a facilities location problem. Given \eqn{n} facilities and
 \eqn{n} locations with a matrix \eqn{A} specifying the flows between facilities and
 a matrix \eqn{B} with location distances,
-find the best facility to location assignment that minimizes the total transporation cost given
+find the best facility to location assignment that minimizes the total transportation cost given
 as flow times distance.
 The assignment is represented by a permutation matrix \eqn{X}{X} and
 the objective is

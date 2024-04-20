@@ -1,3 +1,7 @@
+# qap 0.1-2.1 (2024-xx-xx)
+
+* fixed typo.
+
 # qap 0.1-2 (2022-06-27)
 
 * Fixed FORTRAN 2018 issues.
