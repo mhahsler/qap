@@ -44,7 +44,9 @@ Although, the QAP was introduced as a combinatorial optimization problem for the
 The QAP is known to be NP-hard. This function implements the simple
 simulated annealing heuristic described by Burkard and Rendl (1984).
 The code is based on Rendl's FORTRAN implementation of the algorithm available
-at the QAPLIB website.
+at the QAPLIB website. The authors suggests that it can produce heuristic solutions
+for QAPs with a dimension of 256 objects or less. However, this is not a hard
+limit in the implementation.
 
 The solver has the additional arguments
 \code{rep = 1L, miter = 2 * nrow(A), fiter = 1.1,

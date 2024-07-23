@@ -1,4 +1,4 @@
-## Calls Fortran implentation of:
+## Calls FORTRAN implementation of:
 ## R.E. BURKARD and F. RENDL. A thermodynamically motivated
 ## simulation procedure for combinatorial optimization problems.
 ## European Journal of Operations Research, 17(2):169-174, 1984.

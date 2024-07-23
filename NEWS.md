@@ -1,6 +1,6 @@
 # qap 0.1-2.1 (2024-xx-xx)
 
-* fixed typo.
+* small changes to the documentation.
 
 # qap 0.1-2 (2022-06-27)
 
