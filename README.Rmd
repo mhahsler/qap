@@ -29,7 +29,7 @@ pkg_install(pkg)
 ## Usage
 
 The package contains a copy of the problem instances and solutions
-from [QAPLIB](https://www.opt.math.tugraz.at/qaplib/).
+from [QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/).
 We load the `had20` QAPLIB problem. The problem contains the A and B matrices and the optimal solution and the optimal
 objective function value. 
 ```{r}
