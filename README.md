@@ -4,9 +4,9 @@
 [![r-universe
 status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe.dev/qap)
 [![Package on
-CRAN](http://www.r-pkg.org/badges/version/qap)](https://CRAN.R-project.org/package=qap)
+CRAN](https://www.r-pkg.org/badges/version/qap)](https://CRAN.R-project.org/package=qap)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/qap)](https://CRAN.R-project.org/package=qap)
+downloads](https://cranlogs.r-pkg.org/badges/qap)](https://CRAN.R-project.org/package=qap)
 
 ## Introduction
 
@@ -58,9 +58,9 @@ install.packages("qap",
 ## Usage
 
 The package contains a copy of the problem instances and solutions from
-[QAPLIB](https://www.opt.math.tugraz.at/qaplib/). We load the `had20`
-QAPLIB problem. The problem contains the A and B matrices and the
-optimal solution and the optimal objective function value.
+[QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/). We load the
+`had20` QAPLIB problem. The problem contains the A and B matrices and
+the optimal solution and the optimal objective function value.
 
 ``` r
 library(qap)
