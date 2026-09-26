@@ -1,12 +1,14 @@
 
 # <img src="man/figures/logo.svg" align="right" height="139" /> R package qap - Heuristics for the Quadratic Assignment Problem (QAP)
 
-[![r-universe
-status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe.dev/qap)
 [![Package on
 CRAN](https://www.r-pkg.org/badges/version/qap)](https://CRAN.R-project.org/package=qap)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/qap)](https://CRAN.R-project.org/package=qap)
+![License](https://img.shields.io/cran/l/qap) [![r-universe
+status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe.dev/qap)
+
+**Maintainer:** [Michael Hahsler](https://michael.hahsler.net)
 
 ## Introduction
 
@@ -27,7 +29,8 @@ The following R packages use `qap`:
 To cite package ‘qap’ in publications use:
 
 > Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
-> Problem (QAP)*. R package version 0.1-2,
+> Problem (QAP)*. <doi:10.32614/CRAN.package.qap>
+> <https://doi.org/10.32614/CRAN.package.qap>. R package version 0.1-2,
 > <https://CRAN.R-project.org/package=qap>.
 
     @Manual{,
@@ -36,6 +39,7 @@ To cite package ‘qap’ in publications use:
       year = {2022},
       note = {R package version 0.1-2},
       url = {https://CRAN.R-project.org/package=qap},
+      doi = {10.32614/CRAN.package.qap},
     }
 
 ## Installation
@@ -101,7 +105,8 @@ Compare the solution with known optimum (% above optimum).
 ## References
 
 - Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
-  Problem (QAP)*. R package version 0.1-2,
+  Problem (QAP)*. <doi:10.32614/CRAN.package.qap>
+  <https://doi.org/10.32614/CRAN.package.qap>. R package version 0.1-2,
   <https://CRAN.R-project.org/package=qap>.
 - R.E. Burkard and F. Rendl (1984). A thermodynamically motivated
   simulation procedure for combinatorial optimization problems.
