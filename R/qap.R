@@ -11,11 +11,20 @@
 #' @param o A permutation vector assigning facilities to locations.
 #'
 #' @details
-#' Given flows between facilities in `A` and distances between locations in
-#' `B`, the QAP seeks an assignment that minimizes the sum of flow times
-#' distance. For an assignment represented by a permutation matrix \eqn{X},
-#' the objective is
-#' \deqn{\min_{X \in \Pi}\; \mathrm{tr}(AXBX^T)}
+#' The problem is to assign \eqn{n} facilities to \eqn{n} locations to minimize total transportation or 
+#' interaction costs.
+#' Required flows between the facilities are represented by the matrix \eqn{A} and distances between locations
+#' is given in matrix \eqn{B}. The QAP seeks an assignment that minimizes the 
+#' sum of flows times distance. 
+#' For an assignment represented by a \eqn{n \times n}{n x n} permutation matrix \eqn{X} used to
+#' assign the facilities to the locations in the order given by the 
+#' permuation,
+#' the objective can be written as 
+#' 
+#' \deqn{\min_{X \in \Pi}\; \mathrm{tr}(AXB^TX^T)}{min_(X in Pi) tr(AXB'X')}
+#'
+#' where \eqn{\Pi}{Pi} is the set of all valid \eqn{n \times n}{n x n} permutation matrices.
+#' Note that for symmetric distances, the distance matrix \eqn{B} does not need to be transposed. 
 #'
 #' The QAP originated as a facility location problem (Koopmans and Beckmann,
 #' 1957) and also has applications in data analysis (Hubert and Schultz, 1976).
