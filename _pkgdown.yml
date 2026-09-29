@@ -1,3 +1,4 @@
 url: https://michael.hahsler.net/qap/
 template:
   bootstrap: 5
+  math-rendering: mathjax

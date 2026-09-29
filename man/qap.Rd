@@ -10,16 +10,19 @@ qap(A, B, method = NULL, ...)
 qap.obj(A, B, o)
 }
 \arguments{
-\item{A}{A symmetric matrix of nonnegative flows between facilities.}
+\item{A}{A numeric matrix of flows between facilities. For \code{qap()}, it
+must be at least 2 by 2, symmetric, nonnegative, and finite.}
 
-\item{B}{A symmetric matrix of nonnegative distances between locations.}
+\item{B}{A numeric matrix of distances between locations. For \code{qap()}, it
+must have the same dimensions as \code{A} and be symmetric, nonnegative, and
+finite.}
 
 \item{method}{Solver name. Currently only \code{"SA"} is available.}
 
 \item{...}{Additional arguments passed to the simulated annealing solver.
 See Details.}
 
-\item{o}{A permutation vector assigning facilities to locations.}
+\item{o}{A permutation of \code{1:nrow(A)} assigning facilities to locations.}
 }
 \value{
 \code{qap()} returns an integer vector of facility to location
@@ -38,7 +41,7 @@ is given in matrix \eqn{B}. The QAP seeks an assignment that minimizes the
 sum of flows times distance.
 For an assignment represented by a \eqn{n \times n}{n x n} permutation matrix \eqn{X} used to
 assign the facilities to the locations in the order given by the
-permuation,
+permutation,
 the objective can be written as
 
 \deqn{\min_{X \in \Pi}\; \mathrm{tr}(AXB^TX^T)}{min_(X in Pi) tr(AXB'X')}
@@ -55,14 +58,14 @@ up to 256 objects, although the implementation does not enforce this limit.
 
 Additional solver arguments are:
 \describe{
-\item{\code{rep}}{Number of restarts; default \code{1L}.}
-\item{\code{miter}}{Number of iterations at a fixed temperature; default
+\item{\code{rep}}{Positive integer number of restarts; default \code{1L}.}
+\item{\code{miter}}{Positive integer number of iterations at a fixed temperature; default
 \code{2 * nrow(A)}.}
-\item{\code{fiter}}{Factor by which \code{miter} grows after each cooling
-step; default \code{1.1}.}
+\item{\code{fiter}}{Factor of at least 1 by which \code{miter} grows
+after each cooling step; default \code{1.1}.}
 \item{\code{ft}}{Factor by which the temperature decreases after each
-cooling step; default \code{0.5} (between 0 and 1).}
-\item{\code{maxsteps}}{Maximum number of cooling steps; default
+cooling step; default \code{0.5} (strictly between 0 and 1).}
+\item{\code{maxsteps}}{Positive integer maximum number of cooling steps; default
 \code{50L}.}
 \item{\code{verbose}}{Print progress; default \code{FALSE}.}
 }

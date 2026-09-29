@@ -21,6 +21,7 @@ Read a problem instance and, when available, its solution from QAPLIB files.
 \details{
 If a \code{.sln} file with the same base name exists in the same
 directory, the function also reads its solution and objective value.
+Zero-based solutions are converted to R's one-based indexing.
 The package includes QAPLIB instances and solutions in its \code{qaplib}
 directory.
 }

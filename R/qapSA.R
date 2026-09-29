@@ -5,20 +5,26 @@
 
 qapSA <- function(A, B, rep = 1L, miter = 2*nrow(A), fiter = 1.1, ft = .5,
    maxsteps = 50L, verbose = FALSE) {
-  A <- unname(as.matrix(A))
-  B <- unname(as.matrix(B))
+  matrices <- validate_qap_matrices(A, B, min_n = 2L, symmetric = TRUE,
+                                    nonnegative = TRUE)
+  A <- matrices$A
+  B <- matrices$B
 
   storage.mode(A) <- "double"
   storage.mode(B) <- "double"
   n <- nrow(A)
-  if(any(dim(A) != n) || any(dim(B) != n)) stop("Matrix dimensions do not conform!")
-
-  if(!isSymmetric(A) || !isSymmetric(B))
-    stop("Heuristic only available for symmetric QAP.")
-  if(any(A<0) || any(B<0))
-    stop("All values in A and B must be nonnegative.")
-
-  if(ft<0 || ft>=1) stop("ft needs to be in (0 ,1).")
+  rep <- validate_integer_scalar(rep, "rep")
+  miter <- validate_integer_scalar(miter, "miter")
+  maxsteps <- validate_integer_scalar(maxsteps, "maxsteps")
+  if(!is.numeric(fiter) || length(fiter) != 1L || is.na(fiter) ||
+     !is.finite(fiter) || fiter < 1)
+    stop("fiter must be a finite number of at least 1.", call. = FALSE)
+  if(!is.numeric(ft) || length(ft) != 1L || is.na(ft) ||
+     !is.finite(ft) || ft <= 0 || ft >= 1)
+    stop("ft must be a finite number between 0 and 1 (exclusive).",
+         call. = FALSE)
+  if(!is.logical(verbose) || length(verbose) != 1L || is.na(verbose))
+    stop("verbose must be TRUE or FALSE.", call. = FALSE)
 
   if(verbose) cat("Simulated annealing heuristic by Burkard and Rendl.\n")
   if(verbose) cat(sprintf("%5s %10s %10s\n", "rep", "best_obj", "current_obj"))
@@ -28,7 +34,7 @@ qapSA <- function(A, B, rep = 1L, miter = 2*nrow(A), fiter = 1.1, ft = .5,
 
   ## we do repetitions in R (not in the FORTRAN code)
   ## we start with a random permutation in perm
-  for(i in 1:rep) {
+  for(i in seq_len(rep)) {
     res <- .Fortran("qaph4", n = n, a = A, b = B,
       miter = as.integer(miter), fiter = as.double(fiter),
       ft = as.double(ft), ope = integer(n), ol = double(1), perm = sample(n),

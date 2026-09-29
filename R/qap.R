@@ -3,12 +3,15 @@
 #' Solve a quadratic assignment problem (QAP) with a simulated annealing
 #' heuristic. [qap.obj()] calculates the objective value of an assignment.
 #'
-#' @param A A symmetric matrix of nonnegative flows between facilities.
-#' @param B A symmetric matrix of nonnegative distances between locations.
+#' @param A A numeric matrix of flows between facilities. For `qap()`, it
+#'   must be at least 2 by 2, symmetric, nonnegative, and finite.
+#' @param B A numeric matrix of distances between locations. For `qap()`, it
+#'   must have the same dimensions as `A` and be symmetric, nonnegative, and
+#'   finite.
 #' @param method Solver name. Currently only `"SA"` is available.
 #' @param ... Additional arguments passed to the simulated annealing solver.
 #'   See Details.
-#' @param o A permutation vector assigning facilities to locations.
+#' @param o A permutation of `1:nrow(A)` assigning facilities to locations.
 #'
 #' @details
 #' The problem is to assign \eqn{n} facilities to \eqn{n} locations to minimize total transportation or 
@@ -18,7 +21,7 @@
 #' sum of flows times distance. 
 #' For an assignment represented by a \eqn{n \times n}{n x n} permutation matrix \eqn{X} used to
 #' assign the facilities to the locations in the order given by the 
-#' permuation,
+#' permutation,
 #' the objective can be written as 
 #' 
 #' \deqn{\min_{X \in \Pi}\; \mathrm{tr}(AXB^TX^T)}{min_(X in Pi) tr(AXB'X')}
@@ -35,14 +38,14 @@
 #'
 #' Additional solver arguments are:
 #' \describe{
-#'   \item{\code{rep}}{Number of restarts; default \code{1L}.}
-#'   \item{\code{miter}}{Number of iterations at a fixed temperature; default
+#'   \item{\code{rep}}{Positive integer number of restarts; default \code{1L}.}
+#'   \item{\code{miter}}{Positive integer number of iterations at a fixed temperature; default
 #'     \code{2 * nrow(A)}.}
-#'   \item{\code{fiter}}{Factor by which \code{miter} grows after each cooling
-#'     step; default \code{1.1}.}
+#'   \item{\code{fiter}}{Factor of at least 1 by which \code{miter} grows
+#'     after each cooling step; default \code{1.1}.}
 #'   \item{\code{ft}}{Factor by which the temperature decreases after each
-#'     cooling step; default \code{0.5} (between 0 and 1).}
-#'   \item{\code{maxsteps}}{Maximum number of cooling steps; default
+#'     cooling step; default \code{0.5} (strictly between 0 and 1).}
+#'   \item{\code{maxsteps}}{Positive integer maximum number of cooling steps; default
 #'     \code{50L}.}
 #'   \item{\code{verbose}}{Print progress; default \code{FALSE}.}
 #' }
@@ -76,10 +79,14 @@
 qap <- function(A, B, method = NULL, ...) {
   if(is.null(method)) method <- "SA"
 
+  if(!is.character(method) || length(method) != 1L || is.na(method) ||
+     !nzchar(method))
+    stop("method must be a single solver name.", call. = FALSE)
+
   methods <- c("SA")
   method <- methods[pmatch(tolower(method), tolower(methods))]
   if(is.na(method)) stop("Unknown method. Available methods are: ",
-    paste(methods, collapse = ", "))
+    paste(methods, collapse = ", "), call. = FALSE)
 
   if(method == "SA") qapSA(A, B, ...)
   else stop("Unknown method. Available methods are: ",
@@ -89,5 +96,14 @@ qap <- function(A, B, method = NULL, ...) {
 #' @rdname qap
 #' @export
 qap.obj <- function(A, B, o) {
+  matrices <- validate_qap_matrices(A, B)
+  A <- matrices$A
+  B <- matrices$B
+  n <- nrow(A)
+  if(!is.numeric(o) || !is.null(dim(o)) || length(o) != n || anyNA(o) ||
+     any(!is.finite(o)) || any(o != trunc(o)) || any(o < 1 | o > n) ||
+     !identical(sort(as.integer(o)), seq_len(n)))
+    stop("o must be a permutation of 1:nrow(A).", call. = FALSE)
+
   sum(diag(A%*%B[o,o]))
 }

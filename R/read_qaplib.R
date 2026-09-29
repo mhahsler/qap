@@ -6,6 +6,7 @@
 #' @param file Path to a QAPLIB problem file with a `.dat` extension.
 #' @details If a `.sln` file with the same base name exists in the same
 #'   directory, the function also reads its solution and objective value.
+#'   Zero-based solutions are converted to R's one-based indexing.
 #'   The package includes QAPLIB instances and solutions in its `qaplib`
 #'   directory.
 #' @return A list with `A` (the flow matrix), `B` (the distance matrix),
@@ -20,21 +21,42 @@
 #' dir(system.file("qaplib", package = "qap"), pattern = "\\.dat$")
 #' @export
 read_qaplib <- function(file) {
-  if(!file.exists(file)) stop("file ", file, " does not exist!")
+  if(!is.character(file) || length(file) != 1L || is.na(file) ||
+     !nzchar(file) || !file.exists(file) || dir.exists(file))
+    stop("file must name an existing QAPLIB problem file.", call. = FALSE)
 
-  dat <- as.integer(scan(file, quiet = TRUE))
-  n <- dat[1]
+  dat <- scan(file, what = double(), quiet = TRUE)
+  if(length(dat) < 1L || !is.finite(dat[1]) || dat[1] < 1 ||
+     dat[1] != trunc(dat[1]) ||
+     dat[1] > sqrt((.Machine$integer.max - 1) / 2))
+    stop("Invalid QAPLIB problem size in ", file, ".", call. = FALSE)
+  n <- as.integer(dat[1])
+  if(length(dat) != 1 + 2 * n * n || any(!is.finite(dat)) ||
+     any(dat != trunc(dat)) || any(abs(dat) > .Machine$integer.max))
+    stop("Invalid QAPLIB problem data in ", file, ".", call. = FALSE)
+  dat <- as.integer(dat)
 
-  A <- matrix(dat[2:(n*n+1L)], ncol = n, nrow = n, byrow = TRUE)
-  B <- matrix(dat[(n*n+2L):(n*n+2L+n*n-1L)], ncol = n, nrow = n, byrow = TRUE)
+  A <- matrix(dat[seq.int(2L, n*n + 1L)], nrow = n, byrow = TRUE)
+  B <- matrix(dat[seq.int(n*n + 2L, 2L*n*n + 1L)], nrow = n, byrow = TRUE)
 
   # read solution if available
   sol <- NULL
   opt <- NULL
-  file_sol <- sub(".dat", ".sln", file)
-  if(file.exists(file_sol)) {
-    dat <- scan(file_sol, quiet = TRUE)
+  file_sol <- if(grepl("\\.dat$", file)) sub("\\.dat$", ".sln", file) else NULL
+  if(!is.null(file_sol) && file.exists(file_sol)) {
+    dat <- scan(file_sol, what = double(), quiet = TRUE)
+    if(length(dat) != n + 2L || any(!is.finite(dat)) || dat[1] != n)
+      stop("Invalid QAPLIB solution data in ", file_sol, ".", call. = FALSE)
     sol <- dat[-(1:2)]
+    if(any(sol != trunc(sol)))
+      stop("Invalid QAPLIB solution permutation in ", file_sol, ".",
+           call. = FALSE)
+    if(identical(sort(sol), as.double(seq.int(0L, n - 1L))))
+      sol <- sol + 1
+    if(!identical(sort(sol), as.double(seq_len(n))))
+      stop("Invalid QAPLIB solution permutation in ", file_sol, ".",
+           call. = FALSE)
+    sol <- as.integer(sol)
     opt <- dat[2]
   }
 
