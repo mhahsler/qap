@@ -13,14 +13,13 @@ status](https://mhahsler.r-universe.dev/badges/qap)](https://mhahsler.r-universe
 
 This package implements heuristics for the [Quadratic Assignment Problem
 (QAP)](https://en.wikipedia.org/wiki/Quadratic_assignment_problem). The
-QAP was introduced as a combinatorial optimization problem from the
-category of facilities location problems in operations research
-(Koopmans and Beckmann; 1957). It also has many applications in data
-analysis including cluster analysis and seriation (see Hubert and
-Schultz; 1976).
+QAP was introduced as a facility location problem in operations research
+(Koopmans and Beckmann, 1957). It also has applications in data
+analysis, including cluster analysis and seriation (Hubert and Schultz,
+1976).
 
-The problem is NP-hard and the package implements the very effective
-simulated annealing heuristic described in Burkard and Rendl (1984).
+The problem is NP-hard, and the package implements the simulated
+annealing heuristic described in Burkard and Rendl (1984).
 
 The following R packages use `qap`:
 [seriation](https://CRAN.R-project.org/package=seriation)
@@ -66,8 +65,8 @@ install.packages("qap",
 
 The package contains a copy of the problem instances and solutions from
 [QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/). We load the
-`had20` QAPLIB problem. The problem contains the A and B matrices and
-the optimal solution and the optimal objective function value.
+`had20` QAPLIB problem. It contains flow and distance matrices, a known
+optimal solution, and its objective value.
 
 ``` r
 
@@ -106,7 +105,7 @@ a
 ## [1] 6926
 ```
 
-Compare the solution with known optimum (% above optimum).
+Compare the solution with the known optimum (percentage above optimum).
 
 ``` r
 
@@ -125,7 +124,7 @@ Compare the solution with known optimum (% above optimum).
   <https://CRAN.R-project.org/package=qap>.
 - R.E. Burkard and F. Rendl (1984). A thermodynamically motivated
   simulation procedure for combinatorial optimization problems.
-  *European Journal of Operations Research,* 17(2):169-174.
+  *European Journal of Operational Research,* 17(2):169-174.
   <https://doi.org/10.1016/0377-2217(84)90231-5>
 - Koopmans TC, Beckmann M (1957). Assignment problems and the location
   of economic activities. *Econometrica* 25(1):53-76.

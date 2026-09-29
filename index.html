@@ -16,9 +16,9 @@
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Heuristics for the Quadratic Assignment Problem (QAP)">
-<meta name="description" content="Implements heuristics for the Quadratic Assignment Problem (QAP). Although, the QAP was introduced as a combinatorial optimization problem for the facility location problem in operations research, it also has many applications in data analysis. The problem is NP-hard and the package implements a simulated annealing heuristic.">
-<meta property="og:description" content="Implements heuristics for the Quadratic Assignment Problem (QAP). Although, the QAP was introduced as a combinatorial optimization problem for the facility location problem in operations research, it also has many applications in data analysis. The problem is NP-hard and the package implements a simulated annealing heuristic.">
-<meta property="og:image" content="http://michael.hahsler.net/qap/logo.svg">
+<meta name="description" content="Implements a simulated annealing heuristic for the Quadratic Assignment Problem (QAP). Originally formulated as a facility location problem in operations research, the QAP also has applications in data analysis. The problem is NP-hard.">
+<meta property="og:description" content="Implements a simulated annealing heuristic for the Quadratic Assignment Problem (QAP). Originally formulated as a facility location problem in operations research, the QAP also has applications in data analysis. The problem is NP-hard.">
+<meta property="og:image" content="https://michael.hahsler.net/qap/logo.svg">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -63,8 +63,8 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This package implements heuristics for the <a href="https://en.wikipedia.org/wiki/Quadratic_assignment_problem" class="external-link">Quadratic Assignment Problem (QAP)</a>. The QAP was introduced as a combinatorial optimization problem from the category of facilities location problems in operations research (Koopmans and Beckmann; 1957). It also has many applications in data analysis including cluster analysis and seriation (see Hubert and Schultz; 1976).</p>
-<p>The problem is NP-hard and the package implements the very effective simulated annealing heuristic described in Burkard and Rendl (1984).</p>
+<p>This package implements heuristics for the <a href="https://en.wikipedia.org/wiki/Quadratic_assignment_problem" class="external-link">Quadratic Assignment Problem (QAP)</a>. The QAP was introduced as a facility location problem in operations research (Koopmans and Beckmann, 1957). It also has applications in data analysis, including cluster analysis and seriation (Hubert and Schultz, 1976).</p>
+<p>The problem is NP-hard, and the package implements the simulated annealing heuristic described in Burkard and Rendl (1984).</p>
 <p>The following R packages use <code>qap</code>: <a href="https://CRAN.R-project.org/package=seriation" class="external-link">seriation</a></p>
 <p>To cite package ‘qap’ in publications use:</p>
 <blockquote>
@@ -94,7 +94,7 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The package contains a copy of the problem instances and solutions from <a href="https://coral.ise.lehigh.edu/data-sets/qaplib/" class="external-link">QAPLIB</a>. We load the <code>had20</code> QAPLIB problem. The problem contains the A and B matrices and the optimal solution and the optimal objective function value.</p>
+<p>The package contains a copy of the problem instances and solutions from <a href="https://coral.ise.lehigh.edu/data-sets/qaplib/" class="external-link">QAPLIB</a>. We load the <code>had20</code> QAPLIB problem. It contains flow and distance matrices, a known optimal solution, and its objective value.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mhahsler/qap" class="external-link">qap</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
@@ -112,7 +112,7 @@
 <div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">##  [1]  8 15 16 14 19  6  7 12  1 11 10  5  3 20  2 17  4  9 18 13</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="do">## attr(,"obj")</span></span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="do">## [1] 6926</span></span></code></pre></div>
-<p>Compare the solution with known optimum (% above optimum).</p>
+<p>Compare the solution with the known optimum (percentage above optimum).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"obj"</span><span class="op">)</span> <span class="op">-</span> <span class="va">p</span><span class="op">$</span><span class="va">opt</span><span class="op">)</span><span class="op">/</span><span class="va">p</span><span class="op">$</span><span class="va">opt</span> <span class="op">*</span> <span class="fl">100</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">## [1] 0.058</span></span></code></pre></div>
@@ -122,7 +122,7 @@
 </h2>
 <ul>
 <li>Hahsler M (2022). <em>qap: Heuristics for the Quadratic Assignment Problem (QAP)</em>. <a href="doi:10.32614/CRAN.package.qap" class="uri">doi:10.32614/CRAN.package.qap</a> <a href="https://doi.org/10.32614/CRAN.package.qap" class="external-link uri">https://doi.org/10.32614/CRAN.package.qap</a>. R package version 0.1-2, <a href="https://CRAN.R-project.org/package=qap" class="external-link uri">https://CRAN.R-project.org/package=qap</a>.</li>
-<li>R.E. Burkard and F. Rendl (1984). A thermodynamically motivated simulation procedure for combinatorial optimization problems. <em>European Journal of Operations Research,</em> 17(2):169-174. <a href="https://doi.org/10.1016/0377-2217(84)90231-5" class="external-link uri">https://doi.org/10.1016/0377-2217(84)90231-5</a>
+<li>R.E. Burkard and F. Rendl (1984). A thermodynamically motivated simulation procedure for combinatorial optimization problems. <em>European Journal of Operational Research,</em> 17(2):169-174. <a href="https://doi.org/10.1016/0377-2217(84)90231-5" class="external-link uri">https://doi.org/10.1016/0377-2217(84)90231-5</a>
 </li>
 <li>Koopmans TC, Beckmann M (1957). Assignment problems and the location of economic activities. <em>Econometrica</em> 25(1):53-76. <a href="https://doi.org/10.2307/1907742" class="external-link uri">https://doi.org/10.2307/1907742</a>
 </li>

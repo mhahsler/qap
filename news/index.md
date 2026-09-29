@@ -1,8 +1,9 @@
 # Changelog
 
-## qap 0.1-2.1 (2024-xx-xx)
+## qap 0.1-2.1 (unreleased)
 
-- small changes to the documentation.
+- Moved package documentation to roxygen2 and corrected documentation
+  text and links.
 
 ## qap 0.1-2 (2022-06-27)
 

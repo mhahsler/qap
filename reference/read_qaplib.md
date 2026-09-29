@@ -1,6 +1,7 @@
 # Read QAPLIB Files
 
-Reads example file in the format used by QAPLIB.
+Read a problem instance and, when available, its solution from QAPLIB
+files.
 
 ## Usage
 
@@ -12,53 +13,31 @@ read_qaplib(file)
 
 - file:
 
-  file name.
-
-## Details
-
-Problems end with the extension `.dat` and solutions with `.sln`. The
-code tries to read the problem and, if available in the same directory,
-it also reads the solution and the known optimal value from the solution
-file.
-
-The package contains a copy of the problem instances and solutions from
-QAPLIB. The data is stored in the package in directory `qaplib`.
+  Path to a QAPLIB problem file with a `.dat` extension.
 
 ## Value
 
-Returns a list with the components
+A list with `A` (the flow matrix), `B` (the distance matrix), `solution`
+(a known solution, if available), and `opt` (its objective value, if
+available). The last two components are `NULL` when no solution file
+exists.
 
-- D:
+## Details
 
-  distance matrix.
-
-- W:
-
-  weight matrix.
-
-- solution:
-
-  a known optimal solution (if available).
-
-- opt:
-
-  known optimal value (if available).
+If a `.sln` file with the same base name exists in the same directory,
+the function also reads its solution and objective value. The package
+includes QAPLIB instances and solutions in its `qaplib` directory.
 
 ## References
 
-R.E. Burkard, E. Cela, S.E. Karisch and F. Rendl, QAPLIB - A Quadratic
-Assignment Problem Library,
-<https://coral.ise.lehigh.edu/data-sets/qaplib/>
-
-## Author
-
-Michael Hahsler
+Burkard, R. E., Çela, E., Karisch, S. E., and Rendl, F. [QAPLIB: A
+Quadratic Assignment Problem
+Library](https://coral.ise.lehigh.edu/data-sets/qaplib/).
 
 ## Examples
 
 ``` r
-## load a QAPLIB problem instance
-p <- read_qaplib(system.file("qaplib", "had12.dat", package="qap"))
+p <- read_qaplib(system.file("qaplib", "had12.dat", package = "qap"))
 p
 #> $A
 #>       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
@@ -96,9 +75,7 @@ p
 #> $opt
 #> [1] 1652
 #> 
-
-## list all QAPLIB instances
-dir(system.file("qaplib", package="qap"), pattern = "*.dat")
+dir(system.file("qaplib", package = "qap"), pattern = "\\.dat$")
 #>   [1] "bur26a.dat"  "bur26b.dat"  "bur26c.dat"  "bur26d.dat"  "bur26e.dat" 
 #>   [6] "bur26f.dat"  "bur26g.dat"  "bur26h.dat"  "chr12a.dat"  "chr12b.dat" 
 #>  [11] "chr12c.dat"  "chr15a.dat"  "chr15b.dat"  "chr15c.dat"  "chr18a.dat" 
