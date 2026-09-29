@@ -12,11 +12,12 @@ pkg_title(pkg)
 ## Introduction
 
 This package implements heuristics for the [Quadratic Assignment Problem (QAP)](https://en.wikipedia.org/wiki/Quadratic_assignment_problem).
-The QAP was introduced as a combinatorial optimization problem from the category of facilities location 
-problems in operations research (Koopmans and Beckmann; 1957). 
-It also has many applications in data analysis including cluster analysis and seriation (see Hubert and Schultz; 1976).
+The QAP was introduced as a facility location problem in operations research
+(Koopmans and Beckmann, 1957).
+It also has applications in data analysis, including cluster analysis and seriation
+(Hubert and Schultz, 1976).
 
-The problem is NP-hard and the package implements the very effective simulated annealing heuristic 
+The problem is NP-hard, and the package implements the simulated annealing heuristic
 described in Burkard and Rendl (1984).
 
 
@@ -30,8 +31,8 @@ pkg_install(pkg)
 
 The package contains a copy of the problem instances and solutions
 from [QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/).
-We load the `had20` QAPLIB problem. The problem contains the A and B matrices and the optimal solution and the optimal
-objective function value. 
+We load the `had20` QAPLIB problem. It contains flow and distance matrices,
+a known optimal solution, and its objective value.
 ```{r}
 library(qap)
 set.seed(1000)
@@ -47,7 +48,7 @@ a <- qap(p$A, p$B, rep = 10)
 a
 ```
 
-Compare the solution with known optimum (% above optimum).
+Compare the solution with the known optimum (percentage above optimum).
 ```{r}
 (attr(a, "obj") - p$opt)/p$opt * 100
 ```
@@ -58,12 +59,11 @@ Compare the solution with known optimum (% above optimum).
 ```{r results="asis", echo = FALSE} 
   print(citation("qap"), style = "text")
 ```
-* R.E. Burkard and F. Rendl (1984). A thermodynamically motivated simulation procedure for combinatorial optimization problems. _European Journal of Operations Research,_ 17(2):169-174.
+* R.E. Burkard and F. Rendl (1984). A thermodynamically motivated simulation procedure for combinatorial optimization problems. _European Journal of Operational Research,_ 17(2):169-174.
   https://doi.org/10.1016/0377-2217(84)90231-5
 * Koopmans TC, Beckmann M (1957). Assignment problems and the location of economic activities. _Econometrica_ 25(1):53-76.
   https://doi.org/10.2307/1907742
 * Hubert, L., and Schultz, J. (1976). Quadratic assignment as a general data analysis strategy. 
   _British Journal of Mathematical and Statistical Psychology,_ 29(2), 190–241. 
   https://doi.org/10.1111/j.2044-8317.1976.tb00714.x
-
 

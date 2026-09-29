@@ -1,7 +1,7 @@
 ## Calls FORTRAN implementation of:
 ## R.E. BURKARD and F. RENDL. A thermodynamically motivated
 ## simulation procedure for combinatorial optimization problems.
-## European Journal of Operations Research, 17(2):169-174, 1984.
+## European Journal of Operational Research, 17(2):169-174, 1984.
 
 qapSA <- function(A, B, rep = 1L, miter = 2*nrow(A), fiter = 1.1, ft = .5,
    maxsteps = 50L, verbose = FALSE) {
@@ -11,16 +11,16 @@ qapSA <- function(A, B, rep = 1L, miter = 2*nrow(A), fiter = 1.1, ft = .5,
   storage.mode(A) <- "double"
   storage.mode(B) <- "double"
   n <- nrow(A)
-  if(any(dim(A) != n) || any(dim(B) != n)) stop("Matrix do not conform!")
+  if(any(dim(A) != n) || any(dim(B) != n)) stop("Matrix dimensions do not conform!")
 
   if(!isSymmetric(A) || !isSymmetric(B))
     stop("Heuristic only available for symmetric QAP.")
   if(any(A<0) || any(B<0))
-    stop("All values in A and B need to be positive.")
+    stop("All values in A and B must be nonnegative.")
 
   if(ft<0 || ft>=1) stop("ft needs to be in (0 ,1).")
 
-  if(verbose) cat("Simulated Annealing Heuristic by Burkart and Rendl.\n")
+  if(verbose) cat("Simulated annealing heuristic by Burkard and Rendl.\n")
   if(verbose) cat(sprintf("%5s %10s %10s\n", "rep", "best_obj", "current_obj"))
 
   best_perm <- NULL

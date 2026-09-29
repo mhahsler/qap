@@ -1,14 +1,17 @@
 Package: qap
 Title: Heuristics for the Quadratic Assignment Problem (QAP)
 Version: 0.1-2.1
-Date: 2024-xx-xx
+Date: 2026-xx-xx
 Authors@R: c(
     person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
 	email = "mhahsler@lyle.smu.edu",
 	comment = c(ORCID = "0000-0003-2716-1405")),
     person("Franz", "Rendl", role = c("ctb", "cph")))
-Description: Implements heuristics for the Quadratic Assignment Problem (QAP). Although, the QAP was introduced as a combinatorial optimization problem for the facility location problem in operations research, it also has many applications in data analysis. The problem is NP-hard and the package implements a simulated annealing heuristic.
+Description: Implements a simulated annealing heuristic for the Quadratic Assignment Problem (QAP). Originally formulated as a facility location problem in operations research, the QAP also has applications in data analysis. The problem is NP-hard.
 Suggests: testthat
-URL: https://github.com/mhahsler/qap, http://michael.hahsler.net/qap/
+URL: https://github.com/mhahsler/qap, https://michael.hahsler.net/qap/
 BugReports: https://github.com/mhahsler/qap/issues
 License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.0
