@@ -4,6 +4,11 @@
 
 - Moved package documentation to roxygen2 and corrected documentation
   text and links.
+- Added input validation for QAP matrices, permutations, and simulated
+  annealing settings.
+- Improved QAPLIB file validation and converted zero-based solutions to
+  R’s one-based indexing.
+- Expanded tests for invalid inputs and bundled QAPLIB instances.
 
 ## qap 0.1-2 (2022-06-27)
 

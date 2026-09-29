@@ -15,11 +15,14 @@ qap.obj(A, B, o)
 
 - A:
 
-  A symmetric matrix of nonnegative flows between facilities.
+  A numeric matrix of flows between facilities. For `qap()`, it must be
+  at least 2 by 2, symmetric, nonnegative, and finite.
 
 - B:
 
-  A symmetric matrix of nonnegative distances between locations.
+  A numeric matrix of distances between locations. For `qap()`, it must
+  have the same dimensions as `A` and be symmetric, nonnegative, and
+  finite.
 
 - method:
 
@@ -32,7 +35,7 @@ qap.obj(A, B, o)
 
 - o:
 
-  A permutation vector assigning facilities to locations.
+  A permutation of `1:nrow(A)` assigning facilities to locations.
 
 ## Value
 
@@ -48,7 +51,7 @@ facilities are represented by the matrix \\A\\ and distances between
 locations is given in matrix \\B\\. The QAP seeks an assignment that
 minimizes the sum of flows times distance. For an assignment represented
 by a \\n \times n\\ permutation matrix \\X\\ used to assign the
-facilities to the locations in the order given by the permuation, the
+facilities to the locations in the order given by the permutation, the
 objective can be written as
 
 \$\$\min\_{X \in \Pi}\\ \mathrm{tr}(AXB^TX^T)\$\$
@@ -69,24 +72,26 @@ Additional solver arguments are:
 
 - `rep`:
 
-  Number of restarts; default `1L`.
+  Positive integer number of restarts; default `1L`.
 
 - `miter`:
 
-  Number of iterations at a fixed temperature; default `2 * nrow(A)`.
+  Positive integer number of iterations at a fixed temperature; default
+  `2 * nrow(A)`.
 
 - `fiter`:
 
-  Factor by which `miter` grows after each cooling step; default `1.1`.
+  Factor of at least 1 by which `miter` grows after each cooling step;
+  default `1.1`.
 
 - `ft`:
 
   Factor by which the temperature decreases after each cooling step;
-  default `0.5` (between 0 and 1).
+  default `0.5` (strictly between 0 and 1).
 
 - `maxsteps`:
 
-  Maximum number of cooling steps; default `50L`.
+  Positive integer maximum number of cooling steps; default `50L`.
 
 - `verbose`:
 
