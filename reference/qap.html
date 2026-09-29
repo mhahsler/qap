@@ -79,11 +79,18 @@ assignments with the objective value in its <code>"obj"</code> attribute.
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Given flows between facilities in <code>A</code> and distances between locations in
-<code>B</code>, the QAP seeks an assignment that minimizes the sum of flow times
-distance. For an assignment represented by a permutation matrix \(X\),
-the objective is
-$$\min_{X \in \Pi}\; \mathrm{tr}(AXBX^T)$$</p>
+    <p>The problem is to assign \(n\) facilities to \(n\) locations to minimize total transportation or
+interaction costs.
+Required flows between the facilities are represented by the matrix \(A\) and distances between locations
+is given in matrix \(B\). The QAP seeks an assignment that minimizes the
+sum of flows times distance.
+For an assignment represented by a \(n \times n\) permutation matrix \(X\) used to
+assign the facilities to the locations in the order given by the
+permuation,
+the objective can be written as</p>
+<p>$$\min_{X \in \Pi}\; \mathrm{tr}(AXB^TX^T)$$</p>
+<p>where \(\Pi\) is the set of all valid \(n \times n\) permutation matrices.
+Note that for symmetric distances, the distance matrix \(B\) does not need to be transposed.</p>
 <p>The QAP originated as a facility location problem (Koopmans and Beckmann,
 1957) and also has applications in data analysis (Hubert and Schultz, 1976).
 It is NP-hard. The solver uses the simulated annealing heuristic of Burkard
