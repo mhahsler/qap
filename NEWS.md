@@ -1,4 +1,4 @@
-# qap 0.1-2.1 (unreleased)
+# qap 0.1-3 (2026-09-30)
 
 * Moved package documentation to roxygen2 and corrected documentation text and links.
 * Added input validation for QAP matrices, permutations, and simulated annealing settings.
