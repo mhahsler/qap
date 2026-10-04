@@ -1,6 +1,8 @@
 # Changelog
 
-## qap 0.1-2.1 (unreleased)
+## qap 0.1-3 (2026-09-30)
+
+CRAN release: 2026-10-01
 
 - Moved package documentation to roxygen2 and corrected documentation
   text and links.
