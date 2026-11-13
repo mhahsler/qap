@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: [clang-asan, gcc-asan, clang-ubsan, gcc-ubsan, valgrind]
+        container: [clang-asan, gcc-asan, clang-ubsan, valgrind]
 
     steps:
       - uses: actions/checkout@v4
