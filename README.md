@@ -24,21 +24,26 @@ The problem is NP-hard, and the package implements two heuristics:
 - **Simulated annealing** described in Burkard and Rendl (1984)
 - **Robust tabu search** described in Taillard (1991)
 
+The package also contains a copy of the problem instances and solutions
+from [QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/).
+
 The following R packages use `qap`:
 [seriation](https://CRAN.R-project.org/package=seriation)
 
 To cite package ‘qap’ in publications use:
 
 > Hahsler M (2026). *qap: Heuristics for the Quadratic Assignment
-> Problem (QAP)*. R package version 0.1-3,
-> <https://github.com/mhahsler/qap>.
+> Problem (QAP)*. <doi:10.32614/CRAN.package.qap>
+> <https://doi.org/10.32614/CRAN.package.qap>. R package version 0.2-0,
+> <https://CRAN.R-project.org/package=qap>.
 
     @Manual{,
       title = {qap: Heuristics for the Quadratic Assignment Problem (QAP)},
       author = {Michael Hahsler},
       year = {2026},
-      note = {R package version 0.1-3},
-      url = {https://github.com/mhahsler/qap},
+      note = {R package version 0.2-0},
+      url = {https://CRAN.R-project.org/package=qap},
+      doi = {10.32614/CRAN.package.qap},
     }
 
 ## Installation
@@ -60,10 +65,8 @@ install.packages("qap",
 
 ## Usage
 
-The package contains a copy of the problem instances and solutions from
-[QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/). We load the
-`had20` QAPLIB problem. It contains flow and distance matrices, a known
-optimal solution, and its objective value.
+We load the `had20` QAPLIB problem. It contains flow and distance
+matrices, a known optimal solution, and its objective value.
 
 ``` r
 library(qap)
@@ -122,8 +125,9 @@ a
 ## References
 
 - Hahsler M (2026). *qap: Heuristics for the Quadratic Assignment
-  Problem (QAP)*. R package version 0.1-3,
-  <https://github.com/mhahsler/qap>.
+  Problem (QAP)*. <doi:10.32614/CRAN.package.qap>
+  <https://doi.org/10.32614/CRAN.package.qap>. R package version 0.2-0,
+  <https://CRAN.R-project.org/package=qap>.
 - R.E. Burkard and F. Rendl (1984). A thermodynamically motivated
   simulation procedure for combinatorial optimization problems.
   *European Journal of Operational Research,* 17(2):169-174.

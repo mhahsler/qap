@@ -22,6 +22,9 @@ The problem is NP-hard, and the package implements two heuristics:
 * __Simulated annealing__ described in Burkard and Rendl (1984)
 * __Robust tabu search__ described in Taillard (1991)
 
+The package also contains a copy of the problem instances and solutions
+from [QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/).
+
 
 ```{r echo=FALSE, results = 'asis'}
 pkg_usage(pkg)
@@ -31,8 +34,6 @@ pkg_install(pkg)
 
 ## Usage
 
-The package contains a copy of the problem instances and solutions
-from [QAPLIB](https://coral.ise.lehigh.edu/data-sets/qaplib/).
 We load the `had20` QAPLIB problem. It contains flow and distance matrices,
 a known optimal solution, and its objective value.
 ```{r}
