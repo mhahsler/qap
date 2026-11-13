@@ -1,5 +1,14 @@
 # Changelog
 
+## qap 0.2.0 (unreleased)
+
+- Added the robust tabu search heuristic of Taillard (1991) as
+  `qap(method = "RoTS")`.
+- With `verbose = TRUE`, both solvers print their parameter settings and
+  the run time of each restart.
+- Added a vignette comparing the run time and solution quality of both
+  solvers.
+
 ## qap 0.1-3 (2026-09-30)
 
 CRAN release: 2026-10-01
