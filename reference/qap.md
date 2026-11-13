@@ -227,9 +227,9 @@ a <- qap(p$A, p$B, method = "RoTS", rep = 5, verbose = TRUE)
 #> Parameters: n = 12, rep = 5, iter = 1200, tenure = 12, aspiration = 720
 #>   rep   best_obj  current_obj  best_iter   aspired     time
 #>     1       1652         1652         26         1   0.001s
-#>     2       1652         1660         89         2   0.000s
-#>     3       1652         1652        837         3   0.000s
-#>     4       1652         1652         12         0   0.001s
+#>     2       1652         1660         89         2   0.001s
+#>     3       1652         1652        837         3   0.001s
+#>     4       1652         1652         12         0   0.000s
 #>     5       1652         1652         45         3   0.001s
 a
 #>  [1]  3 10 11  2 12  5  6  7  8  1  4  9
