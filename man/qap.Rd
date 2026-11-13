@@ -17,9 +17,10 @@ must be at least 2 by 2, symmetric, nonnegative, and finite.}
 must have the same dimensions as \code{A} and be symmetric, nonnegative, and
 finite.}
 
-\item{method}{Solver name. Currently only \code{"SA"} is available.}
+\item{method}{Solver name: \code{"SA"} (simulated annealing, the default) or
+\code{"RoTS"} (robust tabu search).}
 
-\item{...}{Additional arguments passed to the simulated annealing solver.
+\item{...}{Additional arguments passed to the selected solver.
 See Details.}
 
 \item{o}{A permutation of \code{1:nrow(A)} assigning facilities to locations.}
@@ -30,8 +31,8 @@ assignments with the objective value in its \code{"obj"} attribute.
 \code{qap.obj()} returns the objective value for permutation \code{o}.
 }
 \description{
-Solve a quadratic assignment problem (QAP) with a simulated annealing
-heuristic. \code{\link[=qap.obj]{qap.obj()}} calculates the objective value of an assignment.
+Solve a quadratic assignment problem (QAP) with a simulated annealing or
+robust tabu search heuristic. \code{\link[=qap.obj]{qap.obj()}} calculates the objective value of an assignment.
 }
 \details{
 The problem is to assign \eqn{n} facilities to \eqn{n} locations to minimize total transportation or
@@ -51,31 +52,109 @@ Note that for symmetric distances, the distance matrix \eqn{B} does not need to 
 
 The QAP originated as a facility location problem (Koopmans and Beckmann,
 1957) and also has applications in data analysis (Hubert and Schultz, 1976).
-It is NP-hard. The solver uses the simulated annealing heuristic of Burkard
+It is NP-hard. Two heuristics are available.
+\subsection{Simulated Annealing}{
+
+\code{method = "SA"} uses the simulated annealing heuristic of Burkard
 and Rendl (1984), based on Rendl's Fortran implementation from QAPLIB.
 The authors suggest it can produce heuristic solutions for problems with
 up to 256 objects, although the implementation does not enforce this limit.
 
-Additional solver arguments are:
+Additional arguments for \code{method = "SA"} are:
 \describe{
-\item{\code{rep}}{Positive integer number of restarts; default \code{1L}.}
-\item{\code{miter}}{Positive integer number of iterations at a fixed temperature; default
-\code{2 * nrow(A)}.}
+\item{\code{rep}}{Positive integer number of restarts.
+More restarts can help with local optima. Default: \code{1L}.}
+\item{\code{miter}}{Positive integer number of iterations at a fixed temperature.
+Increasing miter typically leads to modest reduction
+in the optimality gap while increasing runtime.
+Default: \code{2 * nrow(A)}.}
 \item{\code{fiter}}{Factor of at least 1 by which \code{miter} grows
-after each cooling step; default \code{1.1}.}
+after each cooling step. Larger values lead to very long runtimes.
+Default \code{1.1}.}
 \item{\code{ft}}{Factor by which the temperature decreases after each
-cooling step; default \code{0.5} (strictly between 0 and 1).}
-\item{\code{maxsteps}}{Positive integer maximum number of cooling steps; default
-\code{50L}.}
-\item{\code{verbose}}{Print progress; default \code{FALSE}.}
+cooling step. When increasing this value, \code{maxsteps} also needs to be increased.
+Default \code{0.5} (strictly between 0 and 1).}
+\item{\code{maxsteps}}{Positive integer maximum number of cooling steps.
+The search also stops earlier once it has frozen, i.e., the
+objective value did not change during a whole step. With the default
+cooling rate this typically happens for problems with less than
+150 objects before the default \code{maxsteps} of 50 is reached, however, larger problems
+can benefit from increasing \code{maxsteps}.
+Default \code{50L}.}
+\item{\code{verbose}}{Print the parameter settings and, for each
+restart, the best and current objective values, the number of cooling
+steps used, the final temperature, and the run time; default \code{FALSE}.}
+}
+
+A good starting point for experiments is to set \code{maxsteps} very large
+(e.g., 100000) and then slow down cooling by increasing \code{ft} from 0.5
+in 0.1 steps towards 1.
+Use \code{verbose = TRUE} to see the algorithm's behavior given the parameters
+and if \code{maxsteps} stop simulated annealing too early with a high final
+temperature.
+}
+
+\subsection{Robust Tabu Search}{
+
+\code{method = "RoTS"} uses the robust tabu search of Taillard (1991). It
+repeatedly moves to the best pairwise exchange of two facilities that is
+not tabu, where a tabu tenure that varies randomly around \code{tenure}
+iterations prevents facilities from returning to recently used locations.
+Moves are accepted regardless of tabu status if they give a new best
+solution or place a facility at a location it has not used for more than
+\code{aspiration} iterations. Random numbers come from R's generator, so results
+can be reproduced with \code{\link[=set.seed]{set.seed()}}.
+
+Additional arguments for \code{method = "RoTS"} are:
+\describe{
+\item{\code{rep}}{Positive integer number of restarts from random
+permutations. More restarts reduce the dependence on the starting
+permutation. Default \code{1L}.}
+\item{\code{iter}}{Positive integer number of tabu search iterations
+per restart. The run time grows linearly with \code{iter}. Default
+\code{100 * nrow(A)}.}
+\item{\code{tenure}}{Positive integer mean tabu tenure. The actual
+tenure is drawn uniformly from 0.9 to 1.1 times this value. A longer
+tenure forbids more moves and pushes the search further away from the
+current region, a shorter tenure makes it more greedy. Default
+\code{nrow(A)}.}
+\item{\code{aspiration}}{Nonnegative number of iterations after which
+an unused placement may override the tabu status. Default
+\code{5 * nrow(A)^2}.}
+\item{\code{verbose}}{Print the parameter settings and, for each
+restart, the best and current objective values, the iteration at which
+the best solution was found (\code{best_iter}), the number of tabu moves
+taken because of aspiration (\code{aspired}), and the run time; default
+\code{FALSE}.}
+}
+
+Unlike simulated annealing, tabu search always runs for \code{iter} iterations.
+The tabu tenure controls how strongly the
+search is pushed to explore and stays fixed during the run.
+The defaults follow Taillard (1991) and worked well
+for many small QAPLIB problems where small changes of the parameters
+\code{tenure} and \code{aspiration} often make very little difference.
+
+Use \code{verbose = TRUE}
+to check \code{best_iter}: if the best solution is found close to \code{iter}, the
+search was still improving and \code{iter} should be increased. If it is found
+much earlier, the rest of the run added little, and a smaller \code{iter} with
+more restarts may be more effective.
 }
 }
 \examples{
+set.seed(1234)
 p <- read_qaplib(system.file("qaplib", "had12.dat", package = "qap"))
-a <- qap(p$A, p$B, verbose = TRUE)
+cat("Optimal solution:", p$opt)
+
+a <- qap(p$A, p$B, verbose = TRUE, rep = 5)
 a
-qap.obj(p$A, p$B, a)
-(attr(a, "obj") - p$opt) / p$opt * 100
+cat("optimality gap:", (attr(a, "obj") - p$opt) / p$opt * 100, "\%")
+
+# robust tabu search often finds the optimal solution
+a <- qap(p$A, p$B, method = "RoTS", rep = 5, verbose = TRUE)
+a
+cat("optimality gap:", (attr(a, "obj") - p$opt) / p$opt * 100, "\%")
 }
 \references{
 Burkard, R. E. and Rendl, F. (1984). A thermodynamically motivated
@@ -86,6 +165,10 @@ simulation procedure for combinatorial optimization problems.
 Koopmans, T. C. and Beckmann, M. (1957). Assignment problems and the
 location of economic activities. \emph{Econometrica}, 25(1), 53-76.
 \doi{10.2307/1907742}
+
+Taillard, E. (1991). Robust taboo search for the quadratic assignment
+problem. \emph{Parallel Computing}, 17(4-5), 443-455.
+\doi{10.1016/S0167-8191(05)80147-4}
 
 Hubert, L. and Schultz, J. (1976). Quadratic assignment as a general data
 analysis strategy. \emph{British Journal of Mathematical and Statistical

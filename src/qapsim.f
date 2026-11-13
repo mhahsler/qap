@@ -18,12 +18,15 @@ c     *      output                                                   *
 c     *        ope(i)  best permutation found by procedure (integer)  *
 c     *                i=1,...n                                       *
 c     *        ol      objective function value for ope(i) (double)   *
+c     *        nsteps  number of cooling steps used (integer)         *
+c     *        tlast   temperature used in the last cooling step      *
 c *** *****************************************************************
 
       subroutine qaph4(n, a, b, miter, fiter, ft,
-     1                  ope, ol, perm, maxsteps)
+     1                  ope, ol, perm, maxsteps, nsteps, tlast)
 
-      integer n, maxsteps, step
+      integer n, maxsteps, step, nsteps
+      double precision tlast
       integer ope(n), perm(n), miter
       double precision fiter, ft
       integer i, j, ibild, jbild, kbild, i1, i2, j1
@@ -132,6 +135,7 @@ c  best found solution
   900    continue
 
 c  adjust iteration control variables m1 and t1
+      tlast = t1
       t1 = t1 * ft
       m1 = m1 * fiter
 
@@ -143,8 +147,9 @@ c  stopping criterion
       step = step + 1
       if (max .gt. min .and. step .lt. maxsteps) goto 300
 
-c  set output variable ol
+c  set output variables ol and nsteps
       ol = ibest
+      nsteps = step
 
 c    Return R RNG
       CALL Putrngstate()

@@ -17,8 +17,10 @@ The QAP was introduced as a facility location problem in operations research
 It also has applications in data analysis, including cluster analysis and seriation
 (Hubert and Schultz, 1976).
 
-The problem is NP-hard, and the package implements the simulated annealing heuristic
-described in Burkard and Rendl (1984).
+The problem is NP-hard, and the package implements two heuristics: 
+
+* __Simulated annealing__ described in Burkard and Rendl (1984)
+* __Robust tabu search__ described in Taillard (1991)
 
 
 ```{r echo=FALSE, results = 'asis'}
@@ -53,6 +55,13 @@ Compare the solution with the known optimum (percentage above optimum).
 (attr(a, "obj") - p$opt)/p$opt * 100
 ```
 
+Robust tabu search (`method = "RoTS"`) is slower but often finds better solutions.
+```{r}
+a <- qap(p$A, p$B, method = "RoTS", rep = 10)
+a
+(attr(a, "obj") - p$opt)/p$opt * 100
+```
+
 ## References
 
 * 
@@ -61,6 +70,9 @@ Compare the solution with the known optimum (percentage above optimum).
 ```
 * R.E. Burkard and F. Rendl (1984). A thermodynamically motivated simulation procedure for combinatorial optimization problems. _European Journal of Operational Research,_ 17(2):169-174.
   https://doi.org/10.1016/0377-2217(84)90231-5
+* Taillard, E. (1991). Robust taboo search for the quadratic assignment problem.
+  _Parallel Computing,_ 17(4-5), 443-455.
+  https://doi.org/10.1016/S0167-8191(05)80147-4
 * Koopmans TC, Beckmann M (1957). Assignment problems and the location of economic activities. _Econometrica_ 25(1):53-76.
   https://doi.org/10.2307/1907742
 * Hubert, L., and Schultz, J. (1976). Quadratic assignment as a general data analysis strategy. 

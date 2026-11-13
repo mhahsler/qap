@@ -19,26 +19,26 @@ QAP was introduced as a facility location problem in operations research
 analysis, including cluster analysis and seriation (Hubert and Schultz,
 1976).
 
-The problem is NP-hard, and the package implements the simulated
-annealing heuristic described in Burkard and Rendl (1984).
+The problem is NP-hard, and the package implements two heuristics:
+
+- **Simulated annealing** described in Burkard and Rendl (1984)
+- **Robust tabu search** described in Taillard (1991)
 
 The following R packages use `qap`:
 [seriation](https://CRAN.R-project.org/package=seriation)
 
 To cite package ‘qap’ in publications use:
 
-> Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
-> Problem (QAP)*. <doi:10.32614/CRAN.package.qap>
-> <https://doi.org/10.32614/CRAN.package.qap>. R package version 0.1-2,
-> <https://CRAN.R-project.org/package=qap>.
+> Hahsler M (2026). *qap: Heuristics for the Quadratic Assignment
+> Problem (QAP)*. R package version 0.1-3,
+> <https://github.com/mhahsler/qap>.
 
     @Manual{,
       title = {qap: Heuristics for the Quadratic Assignment Problem (QAP)},
       author = {Michael Hahsler},
-      year = {2022},
-      note = {R package version 0.1-2},
-      url = {https://CRAN.R-project.org/package=qap},
-      doi = {10.32614/CRAN.package.qap},
+      year = {2026},
+      note = {R package version 0.1-3},
+      url = {https://github.com/mhahsler/qap},
     }
 
 ## Installation
@@ -101,16 +101,36 @@ Compare the solution with the known optimum (percentage above optimum).
 
     ## [1] 0.058
 
+Robust tabu search (`method = "RoTS"`) is slower but often finds better
+solutions.
+
+``` r
+a <- qap(p$A, p$B, method = "RoTS", rep = 10)
+a
+```
+
+    ##  [1]  8 15  1  6 19 14  7 17 16 12 10 11  5 20  2  3  4  9 18 13
+    ## attr(,"obj")
+    ## [1] 6922
+
+``` r
+(attr(a, "obj") - p$opt)/p$opt * 100
+```
+
+    ## [1] 0
+
 ## References
 
-- Hahsler M (2022). *qap: Heuristics for the Quadratic Assignment
-  Problem (QAP)*. <doi:10.32614/CRAN.package.qap>
-  <https://doi.org/10.32614/CRAN.package.qap>. R package version 0.1-2,
-  <https://CRAN.R-project.org/package=qap>.
+- Hahsler M (2026). *qap: Heuristics for the Quadratic Assignment
+  Problem (QAP)*. R package version 0.1-3,
+  <https://github.com/mhahsler/qap>.
 - R.E. Burkard and F. Rendl (1984). A thermodynamically motivated
   simulation procedure for combinatorial optimization problems.
   *European Journal of Operational Research,* 17(2):169-174.
   <https://doi.org/10.1016/0377-2217(84)90231-5>
+- Taillard, E. (1991). Robust taboo search for the quadratic assignment
+  problem. *Parallel Computing,* 17(4-5), 443-455.
+  <https://doi.org/10.1016/S0167-8191(05)80147-4>
 - Koopmans TC, Beckmann M (1957). Assignment problems and the location
   of economic activities. *Econometrica* 25(1):53-76.
   <https://doi.org/10.2307/1907742>

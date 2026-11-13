@@ -58,3 +58,68 @@ test_that("qap validates solver settings before calling Fortran", {
   expect_error(qap(A, B, method = character()), "method")
   expect_error(qap(A, B, method = "unknown"), "Unknown method")
 })
+
+test_that("robust tabu search returns a valid assignment and objective", {
+  p <- read_qaplib(system.file("qaplib", "had12.dat", package = "qap"))
+  set.seed(42)
+  assignment <- qap(p$A, p$B, method = "RoTS", rep = 2L)
+
+  expect_identical(sort(as.integer(assignment)), seq_len(nrow(p$A)))
+  expect_equal(unname(attr(assignment, "obj")), qap.obj(p$A, p$B, assignment))
+  expect_gte(attr(assignment, "obj"), p$opt)
+})
+
+test_that("robust tabu search finds known optima of small instances", {
+  for(f in c("had12", "nug12", "chr12a")) {
+    p <- read_qaplib(system.file("qaplib", paste0(f, ".dat"), package = "qap"))
+    set.seed(1)
+    a <- qap(p$A, p$B, method = "RoTS", rep = 5L, iter = 2000L)
+    expect_equal(unname(attr(a, "obj")), p$opt)
+  }
+})
+
+test_that("robust tabu search works for the smallest problem", {
+  A <- matrix(c(0, 2, 2, 0), 2)
+  B <- matrix(c(0, 3, 3, 0), 2)
+  set.seed(1)
+  a <- qap(A, B, method = "rots", iter = 5L, tenure = 1L)
+  expect_identical(sort(as.integer(a)), 1:2)
+  expect_equal(unname(attr(a, "obj")), 12)
+})
+
+test_that("robust tabu search is reproducible with a seed", {
+  p <- read_qaplib(system.file("qaplib", "nug15.dat", package = "qap"))
+  set.seed(7); a <- qap(p$A, p$B, method = "RoTS", iter = 300L)
+  set.seed(7); b <- qap(p$A, p$B, method = "RoTS", iter = 300L)
+  expect_identical(a, b)
+})
+
+test_that("robust tabu search validates settings", {
+  A <- matrix(c(0, 2, 2, 0), 2)
+  B <- matrix(c(0, 3, 3, 0), 2)
+
+  bad_settings <- list(
+    list(rep = 0), list(iter = 0), list(iter = 1.5), list(tenure = 0),
+    list(aspiration = -1), list(aspiration = NA_real_),
+    list(aspiration = Inf), list(verbose = NA)
+  )
+  for(setting in bad_settings)
+    expect_error(do.call(qap, c(list(A = A, B = B, method = "RoTS"), setting)))
+  expect_error(qap(matrix(c(0, 1, 2, 0), 2), B, method = "RoTS"), "symmetric")
+})
+
+test_that("verbose output shows the parameter settings", {
+  p <- read_qaplib(system.file("qaplib", "had12.dat", package = "qap"))
+  set.seed(1)
+  expect_output(qap(p$A, p$B, rep = 2L, ft = 0.6, verbose = TRUE),
+                "Parameters: n = 12, rep = 2, miter = 24.*ft = 0.6.*steps.*final_temp")
+  expect_output(qap(p$A, p$B, method = "RoTS", iter = 50L, verbose = TRUE),
+                "Parameters: n = 12, rep = 1, iter = 50, tenure = 12")
+})
+
+test_that("robust tabu search verbose output shows best iteration and aspiration", {
+  p <- read_qaplib(system.file("qaplib", "had12.dat", package = "qap"))
+  set.seed(1)
+  expect_output(qap(p$A, p$B, method = "RoTS", iter = 50L, verbose = TRUE),
+                "best_iter.*aspired")
+})
