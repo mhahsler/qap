@@ -1,7 +1,7 @@
 name: Sanitizers
 
-# Runs the package tests with AddressSanitizer and UndefinedBehaviorSanitizer
-# (the same configurations CRAN uses) in the rocker r-devel-san images.
+# Runs R CMD check in the R-hub sanitizer/valgrind containers, which mimic
+# the additional checks CRAN runs on packages with compiled code.
 
 on:
   push:
@@ -18,54 +18,23 @@ on:
 jobs:
   sanitizers:
     runs-on: ubuntu-latest
-    name: ${{ matrix.config.name }}
+    name: ${{ matrix.container }}
     container:
-      image: ${{ matrix.config.image }}
-      options: --security-opt seccomp=unconfined
+      image: ghcr.io/r-hub/containers/${{ matrix.container }}:latest
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - { name: "gcc ASAN/UBSAN", image: "rocker/r-devel-san", rbin: "RDsan" }
-          - { name: "clang ASAN/UBSAN", image: "rocker/r-devel-ubsan-clang", rbin: "RDcsan" }
-
-    env:
-      ASAN_OPTIONS: "detect_leaks=0:detect_odr_violation=0:abort_on_error=1"
-      UBSAN_OPTIONS: "print_stacktrace=1:halt_on_error=1"
-      R_BIN: ${{ matrix.config.rbin }}
+        container: [clang-asan, gcc-asan, clang-ubsan, gcc-ubsan, valgrind]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          $R_BIN -q -e 'install.packages(c("testthat"), repos = "https://cloud.r-project.org")'
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
 
-      - name: Install package
-        run: $R_BIN CMD INSTALL --no-docs --no-test-load .
-
-      - name: Run tests
-        run: |
-          cd tests
-          $R_BIN -q -f testthat.R
-
-  valgrind:
-    runs-on: ubuntu-latest
-    name: valgrind
-    container:
-      image: rocker/r-devel
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install valgrind and dependencies
-        run: |
-          apt-get update && apt-get install -y --no-install-recommends valgrind
-          RD -q -e 'install.packages("testthat", repos = "https://cloud.r-project.org")'
-
-      - name: Install package
-        run: RD CMD INSTALL --no-docs --no-test-load .
-
-      - name: Run tests under valgrind
-        run: |
-          cd tests
-          RD -d "valgrind --leak-check=full --show-leak-kinds=definite --error-exitcode=1 --track-origins=yes" --vanilla -f testthat.R
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--ignore-vignettes")'
+          build_args: 'c("--no-build-vignettes")'
+          error-on: '"error"'
