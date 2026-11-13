@@ -66,10 +66,10 @@ knitr::kable(res, digits = 3, row.names = FALSE,
 
 | Instance |   n |  Optimum | SA gap (%) | RoTS gap (%) | SA time (s) | RoTS time (s) |
 |:---------|----:|---------:|-----------:|-------------:|------------:|--------------:|
-| tai30a   |  30 |  1818146 |      4.495 |        0.000 |       0.002 |         0.051 |
-| tai50a   |  50 |  4938796 |      5.799 |        1.475 |       0.003 |         0.236 |
-| tai80a   |  80 | 13499184 |      4.147 |        1.370 |       0.008 |         0.999 |
-| sko100a  | 100 |   152002 |      1.457 |        0.141 |       0.030 |         1.966 |
+| tai30a   |  30 |  1818146 |      4.495 |        0.000 |       0.002 |         0.054 |
+| tai50a   |  50 |  4938796 |      5.799 |        1.475 |       0.002 |         0.238 |
+| tai80a   |  80 | 13499184 |      4.147 |        1.370 |       0.007 |         0.948 |
+| sko100a  | 100 |   152002 |      1.457 |        0.141 |       0.021 |         1.811 |
 
 ``` r
 
@@ -120,8 +120,9 @@ seconds, so we leave them out to keep this vignette fast to build.
 ## References
 
 - Hahsler M (2026). *qap: Heuristics for the Quadratic Assignment
-  Problem (QAP)*. R package version 0.2-0,
-  <https://github.com/mhahsler/qap>.
+  Problem (QAP)*. <doi:10.32614/CRAN.package.qap>
+  <https://doi.org/10.32614/CRAN.package.qap>. R package version 0.2-0,
+  <https://CRAN.R-project.org/package=qap>.
 - Burkard, R. E. and Rendl, F. (1984). A thermodynamically motivated
   simulation procedure for combinatorial optimization problems.
   *European Journal of Operational Research,* 17(2), 169-174.

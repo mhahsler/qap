@@ -1,6 +1,6 @@
 # Changelog
 
-## qap 0.2.0 (unreleased)
+## qap 0.2.0 (2026-11-13)
 
 - Added the robust tabu search heuristic of Taillard (1991) as
   `qap(method = "RoTS")`.
