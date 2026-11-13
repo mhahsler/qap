@@ -10,7 +10,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/mhahsler/qap/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/mhahsler/qap/blob/qap_0.2.0/inst/CITATION)
 
 Hahsler M (2026). *qap: Heuristics for the Quadratic Assignment Problem
 (QAP)*.
